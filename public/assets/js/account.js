@@ -12,7 +12,7 @@
             $('#whitelisting-modal').modal('show');
         } else if (!isLoadingModal) {
             isLoadingModal = true;
-            const url = 'https://app.robotbulls.com/user/ajax/account/whitelisting-form';
+            const url = '/user/ajax/account/whitelisting-form';
             const requestOptions = {
                 method: 'POST',
                 headers: {
@@ -44,7 +44,7 @@
             $('#get-key-modal').modal('show');
         } else if (!isLoadingModal) {
             isLoadingModal = true;
-            const url = 'https://app.robotbulls.com/user/ajax/account/get-key-form';
+            const url = '/user/ajax/account/get-key-form';
             const requestOptions = {
                 method: 'POST',
                 headers: {
@@ -100,7 +100,7 @@
             $('#messages-modal').modal('show');
         } else if (!isLoadingModalMessages) {
             isLoadingModalMessages = true;
-            const url = 'https://app.robotbulls.com/user/ajax/account/messages-form';
+            const url = '/user/ajax/account/messages-form';
             const requestOptions = {
                 method: 'POST',
                 headers: {

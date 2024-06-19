@@ -3,7 +3,7 @@ $data = json_decode($transaction->extra);
 $cur = strtolower($transaction->currency);
 $_CUR = strtoupper($cur);
 $_gateway = ucfirst($transaction->payment_method);
-include "/home/robotbq/app.robotbulls.com/config_u.php";
+include config('app.dir') . "/config_u.php";
 @endphp
 <div class="modal fade" id="transaction-details" tabindex="-1">
     <div class="modal-dialog modal-dialog-md modal-dialog-centered">

@@ -54,7 +54,7 @@ class WalletController extends Controller
     public function index()
     {
 
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         if (token('before_kyc') == '1') {
             $check = User::find(Auth::id());
@@ -82,7 +82,7 @@ class WalletController extends Controller
         $is_price_show = token('price_show');
         $contribution = Transaction::user_contribution();
 
-        $string = file_get_contents("/home/robotbq/app.robotbulls.com/assets/coin_graph.json");
+        $string = file_get_contents(config('app.dir') . "/assets/coin_graph.json");
         if ($string === false) {}
 
         $json_a = json_decode($string, true);

@@ -49,7 +49,7 @@ class KycController extends Controller
     public function index()
     {
         $user_kyc = Auth::user()->kyc_info;
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         //add to activity
         $agent = new Agent();
@@ -75,7 +75,7 @@ class KycController extends Controller
     public function view()
     {
         $kyc = Auth::user()->kyc_info;
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         //add to activity
         $agent = new Agent();
@@ -154,7 +154,7 @@ class KycController extends Controller
             'extra' => "application",
         ]);
         
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         return view('user.kyc_application', compact('user_kyc', 'countries', 'title', 'lang'));
     }
 

@@ -110,7 +110,7 @@ class PublicController extends Controller
         $page = Page::where('slug', $slug)->orwhere('custom_slug', $slug)->where('status', 'active')->first();
 
         if ($page != null) {
-            include "/home/robotbq/app.robotbulls.com/config_u.php";
+            include config('app.dir') . "/config_u.php";
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->email_verified_at != null && $user->status == 'active') {

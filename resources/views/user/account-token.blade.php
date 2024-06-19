@@ -23,10 +23,10 @@ $content_class = 'col-lg-8';
                     </h4>
                     <div class="d-flex align-items-center guttar-20px">
                         <div class="flex-col d-sm-block d-none">
-                            <a href="https://app.robotbulls.com/" class="btn btn-light btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left mr-3"></em><span class="back">{{$lang['back']}}</span></a>
+                            <a href="/" class="btn btn-light btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left mr-3"></em><span class="back">{{$lang['back']}}</span></a>
                         </div>
                         <div class="flex-col d-sm-none">
-                            <a href="https://app.robotbulls.com/" class="btn btn-light btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
+                            <a href="/" class="btn btn-light btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
                         </div>
                     </div>
                     </div>    

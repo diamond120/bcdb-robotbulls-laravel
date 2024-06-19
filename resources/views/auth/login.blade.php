@@ -429,7 +429,7 @@
 
                               $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                   console.log(msg);
@@ -465,7 +465,7 @@
 
                                 $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                     console.log(msg);

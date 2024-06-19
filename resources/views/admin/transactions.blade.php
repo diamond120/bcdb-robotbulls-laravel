@@ -1633,7 +1633,7 @@ function updateChannel() {
     var channel = document.getElementsByName("channel")[0].value;
     console.log(channel);
     
-    document.getElementById("smsToUser").action = "https://app.robotbulls.com/"+channel+"/send";
+    document.getElementById("smsToUser").action = "/"+channel+"/send";
     
     document.getElementById("send-message").innerHTML = "Send "+channel.toUpperCase();
     

@@ -23,7 +23,7 @@ class VerifyController extends Controller
     {
 
         // return view('auth.verify');;
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectTo)
             : (view('auth.verify', compact('lang')));

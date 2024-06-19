@@ -2,7 +2,7 @@
   "name": "RobotBulls",
   "short_name": "RobotBulls",
   "description": "Robot Bulls is a multinational fintech startup. We develop trading algorithms for market predictions based on Python and combine Big Data Analytics, Alternative Data, AI & MS to achieve the best possible market performance for your personal portfolio.",
-  "start_url": "https://app.robotbulls.com",
+  "start_url": "",
   "display": "standalone",
   "background_color": "#1940b0",
   "theme_color": "#253992",

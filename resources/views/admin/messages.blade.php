@@ -731,7 +731,7 @@ function updateChannel() {
         channel = "admin/" + channel;
     }
     
-    document.getElementById("smsToUser").action = "https://app.robotbulls.com/" + channel + "/send";
+    document.getElementById("smsToUser").action = "/" + channel + "/send";
     
     document.getElementById("send-message").innerHTML = "Send " + channel.toUpperCase();
 
@@ -768,7 +768,7 @@ function fetchMessagesForUser(userId) {
     
 </script>
 
-<script src="https://app.robotbulls.com/assets/js/twilio.min.js"></script>
+<script src="/assets/js/twilio.min.js"></script>
 
 <!--Twilio make call-->
 <script>

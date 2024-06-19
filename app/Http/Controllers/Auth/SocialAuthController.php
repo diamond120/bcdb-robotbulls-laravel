@@ -55,7 +55,7 @@ class SocialAuthController extends Controller
     {
         try {
             $user = Socialite::driver($social)->user();
-            include "/home/robotbq/app.robotbulls.com/config_auth.php";
+            include config('app.dir') . "/config_auth.php";
             
             if(empty($user)){
                 session()->flash('info', __('Sorry, Something is wrong, please login via your email & password!'));
@@ -166,7 +166,7 @@ class SocialAuthController extends Controller
     public function show_2fa_form()
     {
         if(auth()->user()->google2fa != 1) return redirect()->route('home');
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return view('auth.g2fa', compact('lang'));
     }
 
@@ -181,7 +181,7 @@ class SocialAuthController extends Controller
         if(strtotime($meta->email_expire) < time()) return redirect()->route('register')->with(['warning' => 'Expired 2FA reset verification code!']);
         $user = $meta->user;
 
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return view('auth.reset2fa', compact('user', 'meta', 'token', 'lang'));
     }
 

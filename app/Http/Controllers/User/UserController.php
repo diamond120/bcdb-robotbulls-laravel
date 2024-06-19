@@ -82,7 +82,7 @@ class UserController extends Controller
      */
     public function index() {
         
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         $user = Auth::user();
         $contribution = Transaction::user_contribution();
         $has_sidebar = false;
@@ -177,7 +177,7 @@ class UserController extends Controller
      */
     public function account()
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         $countries = $this->handler->getCountries();
         $user = Auth::user();
         $userMeta = UserMeta::getMeta($user->id);
@@ -217,7 +217,7 @@ class UserController extends Controller
     public function account_activity()
     {
         $user = Auth::user();
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         $activities = Activity::where('user_id', $user->id)->orderBy('created_at', 'DESC')->limit(50)->get();
 
         //add to activity
@@ -246,7 +246,7 @@ class UserController extends Controller
         if(gws('user_mytoken_page')!=1) {
             return redirect()->route('user.home');
         }
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         $user = Auth::user();
         $contribution = Transaction::user_contribution();
         $token_account = Transaction::user_mytoken('balance');
@@ -776,7 +776,7 @@ class UserController extends Controller
      */
     public function get_wallet_form(Request $request)
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         
         //add to activity
         $agent = new Agent();
@@ -793,7 +793,7 @@ class UserController extends Controller
     
     public function whitelisting_form(Request $request)
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         
         //add to activity
         $agent = new Agent();
@@ -810,7 +810,7 @@ class UserController extends Controller
     
     public function get_key_form(Request $request)
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         
         //add to activity
         $agent = new Agent();
@@ -827,7 +827,7 @@ class UserController extends Controller
     
     public function messages_form(Request $request)
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         
         //add to activity
         $agent = new Agent();
@@ -845,7 +845,7 @@ class UserController extends Controller
     
     public function white_paper(Request $request)
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         
         //add to activity
         $agent = new Agent();
@@ -869,7 +869,7 @@ class UserController extends Controller
      */
     public function referral()
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         $page = Page::where('slug', 'referral')->where('status', 'active')->first();
         $reffered = User::where('referral', auth()->id())->get();
         if(get_page('referral', 'status') == 'active'){
@@ -893,7 +893,7 @@ class UserController extends Controller
     
     public function buy_crypto()
     {
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         //add to activity
         $agent = new Agent();

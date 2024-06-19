@@ -178,7 +178,7 @@ class LoginController extends Controller
         if(!$have_user){
             return redirect(url('/register?setup=admin'));
         }
-//        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+//        include config('app.dir') . "/config_auth.php";
 //        return view('auth.login', compact('lang'));
 //        return view('auth.register', compact('lang'));
         return redirect(url('/register'));
@@ -287,7 +287,7 @@ class LoginController extends Controller
     public function verified()
     {
         Auth::logout();
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return view('auth.message', compact('lang'))->with(['text' => __('messages.verify.success.heading'), 'subtext' => __('messages.verify.success.subhead'), 'msg' => __('Please sign-in to start trading.')]);
     }
 
@@ -298,7 +298,7 @@ class LoginController extends Controller
     public function registered()
     {
         Auth::logout();
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         $data = ['text' => __('messages.register.success.heading'), 'subtext' => __('messages.register.success.subhead'), 'msg' => ['type' => 'success', 'text' => __('messages.register.success.msg')]];
         $last_url = str_replace(url('/'), '', url()->previous());
         if ($last_url == '/register') {

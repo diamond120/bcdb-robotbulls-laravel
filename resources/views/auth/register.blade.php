@@ -453,7 +453,7 @@ searchInput.addEventListener('input', () => {
 
                               $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                   console.log(msg);
@@ -499,7 +499,7 @@ searchInput.addEventListener('input', () => {
 
                                 $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                     console.log(msg);

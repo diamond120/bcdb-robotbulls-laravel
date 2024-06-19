@@ -24,7 +24,7 @@ define('LARAVEL_PUBLIC_PATH', __DIR__);
 if (version_compare(phpversion(), '7.1.0', '<')) {
     header('Location:http://'.$_SERVER['HTTP_HOST'].'/error.html');
 }
-require __DIR__.'/../app_rb_folder/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ require __DIR__.'/../app_rb_folder/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../app_rb_folder/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

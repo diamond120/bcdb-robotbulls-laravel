@@ -34,7 +34,7 @@ window.onload = function () {
 	
 }
 </script>
-<script type="text/javascript" src="https://app.robotbulls.com/assets/js/canvasjs.min.js"></script>
+<script type="text/javascript" src="/assets/js/canvasjs.min.js"></script>
 <style>
     .canvasjs-chart-credit {
         display: none !important;
@@ -57,7 +57,7 @@ window.onload = function () {
             
             <h4 class="card-title pb-3">{{ __('RobotBulls Coin', ['symbol' => $symbol]) }}</h4>
             <h5 class="font-mid fs-24 text-dark">1 {{ $symbol }} = <span> {{ $current_price . base_currency(true) }} </span></h5>
-            <div id="coingraph"  style="height: 400px; width: 100%; margin: 0 auto; background-image: url(https://app.robotbulls.com/images/spinner.gif); background-repeat:no-repeat;background-size:30%;background-position: center center;"></div>
+            <div id="coingraph"  style="height: 400px; width: 100%; margin: 0 auto; background-image: url(/images/spinner.gif); background-repeat:no-repeat;background-size:30%;background-position: center center;"></div>
             
             
     </div>
@@ -169,7 +169,7 @@ window.onload = function () {
             <a href="#" class="modal-close" data-dismiss="modal" aria-label="Close"><em class="ti ti-close"></em></a>
             <div class="popup-body">
                 <h3 class="popup-title two_fator_verifiation">White Paper</h3>
-                <iframe src="https://app.robotbulls.com/white-paper" width="500" height="375" type="application/pdf"></iframe>
+                <iframe src="/white-paper" width="500" height="375" type="application/pdf"></iframe>
             </div>
         </div>{{-- .modal-content --}}
     </div>{{-- .modal-dialog --}}

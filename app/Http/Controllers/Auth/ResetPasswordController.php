@@ -44,7 +44,7 @@ class ResetPasswordController extends Controller
      */
     public function showResetForm(Request $request, $token = null)
     {
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return view('auth.passwords.reset')->with(
             ['lang' => $lang, 'token' => $token, 'email' => $request->email]
             );

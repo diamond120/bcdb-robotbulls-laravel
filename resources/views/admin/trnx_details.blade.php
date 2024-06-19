@@ -35,7 +35,7 @@
                         </div>
                         @if (auth()->user()->id == '1')
                         <div>
-                        <a href="https://app.robotbulls.com/admin/transactions?search={{ $trnx->tnxUser->id }}&by=usr&filter=1" class="btn btn-sm btn-auto btn-primary" target="_blank"><span class="d-sm-inline-block d-none">All Transactions</span> <em class="fas fa-arrow-right"></em></a>
+                        <a href="/admin/transactions?search={{ $trnx->tnxUser->id }}&by=usr&filter=1" class="btn btn-sm btn-auto btn-primary" target="_blank"><span class="d-sm-inline-block d-none">All Transactions</span> <em class="fas fa-arrow-right"></em></a>
                         </div>
                         @endif
                     </div>

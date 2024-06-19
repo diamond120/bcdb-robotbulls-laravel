@@ -26,7 +26,7 @@
         function getLanguage() {
             (getCookie("language") == null) ? setLanguage('en') : false;
             $.ajax({ 
-            url:  'https://app.robotbulls.com/assets/languages/' +  getCookie("language") + '.json', 
+            url:  '/assets/languages/' +  getCookie("language") + '.json', 
             dataType: 'json', async: false, dataType: 'json', 
             success: function (lang) { language = lang } });
             

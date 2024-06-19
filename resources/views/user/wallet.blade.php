@@ -44,7 +44,7 @@ window.onload = function () {
 }
 </script>
 <!--<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
-<script type="text/javascript" src="https://app.robotbulls.com/assets/js/canvasjs.min.js"></script>
+<script type="text/javascript" src="/assets/js/canvasjs.min.js"></script>
 <style>
     .canvasjs-chart-credit {
         display: none !important;

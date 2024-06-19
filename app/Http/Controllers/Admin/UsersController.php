@@ -161,8 +161,8 @@ class UsersController extends Controller
     //send SMS
     public function send_sms(Request $request) {
                 
-        $account_sid = config('mobile.account.sid');
-        $auth_token = config('mobile.auth.token');
+        $account_sid = config('mobile.account-sid');
+        $auth_token = config('mobile.auth-token');
         
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -225,15 +225,15 @@ class UsersController extends Controller
     //send whatsapp
     public function send_whatsapp(Request $request) {
                 
-        $account_sid = config('mobile.account.sid');
-        $auth_token = config('mobile.auth.token');
+        $account_sid = config('mobile.account-sid');
+        $auth_token = config('mobile.auth-token');
     
-        $twilio_number = config('mobile.auth.token'); // Replace with your Twilio number
+        $twilio_number = config('mobile.twilio-number'); // Replace with your Twilio number
 
         $client = new Client($account_sid, $auth_token);
 
         $message = $client->messages->create(
-            config('mobile.recipient.number'), // Replace with the recipient's number
+            config('mobile.recipient-number'), // Replace with the recipient's number
             [
                 'from' => $twilio_number,
                 'body' => 'Hello, this is a test message!'

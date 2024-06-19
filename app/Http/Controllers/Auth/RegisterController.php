@@ -33,7 +33,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Twilio\Rest\Client;
 // require $_SERVER['DOCUMENT'] . 'autodoad.php';
 require __DIR__ . '/autoload.php';
-// require ('/home/omd9e55u/app.robotbulls.com/app/Http/Controllers/Auth/autodoad.php');
 
 class RegisterController extends Controller
 {
@@ -81,7 +80,7 @@ class RegisterController extends Controller
         if (application_installed(true) == false) {
             return redirect(url('/install'));
         }
-        include "/home/robotbq/app.robotbulls.com/config_auth.php";
+        include config('app.dir') . "/config_auth.php";
         return view('auth.register', compact('lang'));
     }
 
@@ -237,8 +236,8 @@ class RegisterController extends Controller
         }
                 
         require __DIR__ . '/autoload.php';
-        $account_sid = config('mobile.account.sid');
-        $auth_token = config('mobile.auth.token');
+        $account_sid = config('mobile.account-sid');
+        $auth_token = config('mobile.auth-token');
         
         if(strpos($data['phone'], '+49') !== false //germany
         || strpos($data['phone'], '+33') !== false //france
@@ -298,7 +297,7 @@ class RegisterController extends Controller
                     'from' => 'RobotBulls',
                     'body' => '[RobotBulls] '.$code.' is your verification code, valid for 5 minutes. To keep your account safe, never forward this code.',
                 ]
-            );
+            );s
         }  
         if(strpos($data['phone'], '+32') !== false//belgium 
            || strpos($data['phone'], '+1') !== false

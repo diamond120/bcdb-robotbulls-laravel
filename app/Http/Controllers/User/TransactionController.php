@@ -58,7 +58,7 @@ class TransactionController extends Controller
             'extra' => "transactions",
         ]);
         
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
         return view('user.transactions', compact('trnxs', 'has_trnxs', 'lang'));
     }
 

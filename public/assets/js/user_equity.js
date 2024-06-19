@@ -1,6 +1,6 @@
 function getEquity() {
 
-    const url = 'https://app.robotbulls.com/user/ajax/get_equity';
+    const url = '/user/ajax/get_equity';
     const requestOptions = {
         method: 'POST',
         headers: {

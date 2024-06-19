@@ -446,7 +446,7 @@ $check_users = \App\Models\User::count();
 
                               $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                   console.log(msg);
@@ -484,7 +484,7 @@ $check_users = \App\Models\User::count();
 
                                 $.ajax({
                                 type: "POST",
-                                url: "https://app.robotbulls.com/register/verification",
+                                url: "/register/verification",
                                 data: {phone: phone }
                               }).done(function( msg ) {
                                     console.log(msg);

@@ -12,7 +12,7 @@ if(str_contains(url()->current(), 'contribute')){
     $data->token = round( floatval($data->token) * floatval(get_setting($cur)),2 );   
 }
 
-include "/home/robotbq/app.robotbulls.com/config_u.php";
+include config('app.dir') . "/config_u.php";
 
 @endphp
 
@@ -46,7 +46,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
 
                         <label class="pay-check-label" for="pay-demo" currency="{{ $user->base_currency }}">
                             <span class="pay-check-text" title="You can make a Demo transfer.">{{ $lang['demo_investment'] }}</span>
-                            <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-demo.png" alt="Demo">
+                            <img class="pay-check-img" src="/assets/images/pay-demo.png" alt="Demo">
                         </label>
 
                     </div>
@@ -66,7 +66,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
                      <input type="radio" class="pay-check" value="coinpayments" name="pay_option" required="required" id="pay-btc" data-msg-required="Select your payment method." aria-required="true">
                      <label class="pay-check-label" for="pay-btc" currency="btc">
                          <span class="pay-check-text" title="{{ $lang['you_can_make_payment_with_btc'] }}">Bitcoin</span>
-                         <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-btc.png" alt="btc">
+                         <img class="pay-check-img" src="/assets/images/pay-btc.png" alt="btc">
                      </label>
                      </div>
                  </li>
@@ -76,7 +76,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
                      <input type="radio" class="pay-check" value="coinpayments" name="pay_option" required="required" id="pay-eth" data-msg-required="Select your payment method." aria-required="true">
                      <label class="pay-check-label" for="pay-eth" currency="eth">
                          <span class="pay-check-text" title="{{ $lang['you_can_make_payment_with_eth'] }}">Ethereum</span>
-                         <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-eth.png" alt="eth">
+                         <img class="pay-check-img" src="/assets/images/pay-eth.png" alt="eth">
                      </label>
                      </div>
                  </li>
@@ -85,7 +85,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
                      <input type="radio" class="pay-check" value="coinpayments" name="pay_option" required="required" id="pay-usdt" data-msg-required="Select your payment method." aria-required="true">
                      <label class="pay-check-label" for="pay-usdt" currency="usdt">
                          <span class="pay-check-text" title="{{ $lang['you_can_make_payment_with_usdt'] }}">USDT</span>
-                         <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-usdt.png" alt="usdt">
+                         <img class="pay-check-img" src="/assets/images/pay-usdt.png" alt="usdt">
                      </label>
                      </div>
                  </li>
@@ -94,7 +94,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
                      <input type="radio" class="pay-check" value="coinpayments" name="pay_option" required="required" id="pay-usdc" data-msg-required="Select your payment method." aria-required="true">
                      <label class="pay-check-label" for="pay-usdc" currency="usdc">
                          <span class="pay-check-text" title="{{ $lang['you_can_make_payment_with_usdc'] }}">USDC</span>
-                         <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-usdc.png" alt="usdc">
+                         <img class="pay-check-img" src="/assets/images/pay-usdc.png" alt="usdc">
                      </label>
                      </div>
                  </li>
@@ -118,7 +118,7 @@ include "/home/robotbq/app.robotbulls.com/config_u.php";
                                 <span class="small">Minimum 5000 {{ strtoupper($user->base_currency) }}</span>
                                 @endif
                             </span>
-                                <img class="pay-check-img" src="https://app.robotbulls.com/assets/images/pay-bank.png" alt="">
+                                <img class="pay-check-img" src="/assets/images/pay-bank.png" alt="">
                             </label>
                         </div>
                     </li>

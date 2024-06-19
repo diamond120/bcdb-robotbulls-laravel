@@ -1,5 +1,5 @@
 @php
-include "/home/robotbq/app.robotbulls.com/config_u.php";
+include config('app.dir') . "/config_u.php";
 @endphp
 
 <a href="#" class="modal-close" data-dismiss="modal"><em class="ti ti-close"></em></a>

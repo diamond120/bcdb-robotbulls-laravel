@@ -35,11 +35,11 @@ function daysDifferenceFromToday($datetimeString) {
                     <div class="d-flex align-items-center guttar-20px">
                         @if (auth()->user()->id == '1')
                         <div class="flex-col d-sm-block d-none">
-                            <a href="https://app.robotbulls.com/admin/transactions?search={{ $user->id }}&by=usr&filter=1" class="btn btn-light btn-sm btn-auto btn-primary" target="_blank"><span class="back">Detailed View</span> <em class="fas fa-arrow-right"></em></a>
+                            <a href="/admin/transactions?search={{ $user->id }}&by=usr&filter=1" class="btn btn-light btn-sm btn-auto btn-primary" target="_blank"><span class="back">Detailed View</span> <em class="fas fa-arrow-right"></em></a>
                         </div>
                         @endif
                         <div class="flex-col d-sm-none">
-                            <a href="https://app.robotbulls.com/admin/transactions?search={{ $user->id }}&by=usr&filter=1" class="btn btn-light btn-icon btn-sm btn-primary" target="_blank"><em class="fas fa-arrow-right"></em></a>
+                            <a href="/admin/transactions?search={{ $user->id }}&by=usr&filter=1" class="btn btn-light btn-icon btn-sm btn-primary" target="_blank"><em class="fas fa-arrow-right"></em></a>
                         </div>
                     </div>
                 </div>

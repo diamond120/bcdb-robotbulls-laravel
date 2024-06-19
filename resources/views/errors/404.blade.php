@@ -1,5 +1,5 @@
 @php
-include "/home/robotbq/app.robotbulls.com/config_u.php";
+include config('app.dir') . "/config_u.php";
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="js">

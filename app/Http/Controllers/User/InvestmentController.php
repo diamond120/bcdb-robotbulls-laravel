@@ -105,7 +105,7 @@ class InvestmentController extends Controller
             'extra' => "investment",
         ]);
 
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         return view(
             'user.investment',

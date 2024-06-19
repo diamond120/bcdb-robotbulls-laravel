@@ -84,7 +84,7 @@ class TokenController extends Controller
     public function index()
     {
 
-        include "/home/robotbq/app.robotbulls.com/config_u.php";
+        include config('app.dir') . "/config_u.php";
 
         $trnxs_2 = Transaction::where('user', Auth::id())
                     ->where('status', '!=', 'deleted')
@@ -471,7 +471,7 @@ class TokenController extends Controller
             //3. 
             // return transaction->id, wallet_address, qr_code_url
             
-            include "/home/robotbq/app.robotbulls.com/config_u.php";
+            include config('app.dir') . "/config_u.php";
             
             $ret['opt'] = 'true';
             $ret['modal'] = view('modals.success', compact('lang', 'trnx_id', 'wallet_address', 'qr_code_url'))->render();

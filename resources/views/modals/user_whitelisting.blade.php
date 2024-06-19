@@ -52,7 +52,7 @@
                             @endif
                         </div>
                         <span id="loading-animation" style="display:none;">
-                            <img src="https://app.robotbulls.com/assets/images/loading.gif" alt="Loading" style="width: 20px;"> {!! $lang['wait_for_whitelisting'] !!}
+                            <img src="/assets/images/loading.gif" alt="Loading" style="width: 20px;"> {!! $lang['wait_for_whitelisting'] !!}
                         </span>
                     </div>
                         
