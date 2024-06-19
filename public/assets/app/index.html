@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+
+<iframe id="main_iframe" src="//app.robotbulls.com/" frameborder="0" style="position: absolute; margin-top: env(safe-area-inset-top);width: 100vw;height: calc(100vh - env(safe-area-inset-top));top:0;left:0;"></iframe>
+
+    <script>
+        document.getElementById('main_iframe').onload = function() {
+            // document.getElementById("main_iframe").contentWindow.document.getElementsByClassName("page-ath-footer")[0].onload = function() {
+    
+            var iframe = document.getElementById("main_iframe").contentWindow.document;
+            var jiframe = $("#main_iframe").contents();
+            jiframe.find(".topbar").css("border-top","3px solid white");
+
+            if(document.getElementById("main_iframe").contentWindow.location.href.toString().includes("login") || document.getElementById("main_iframe").contentWindow.location.href.toString().includes("register")) {
+                // try{
+                    iframe.getElementsByClassName("page-ath-footer")[0].remove();
+
+                    // var element = iframe.getElementsByClassName("page-ath-wrap")[0];
+                    // var parent = element.parentNode;
+                    // var ioncontent = iframe.createElement('ion-app');
+                    // parent.replaceChild(ioncontent, element);
+                    // ioncontent.appendChild(element);
+
+                    var element = iframe.getElementsByClassName("page-ath-wrap")[0];
+                    var parent = element.parentNode;
+                    var ioncontent = iframe.createElement('ion-content');
+                    parent.replaceChild(ioncontent, element);
+                    ioncontent.appendChild(element);
+
+                    jiframe.find("ion-content").prepend("<ion-refresher slot='fixed' id='refresher'><ion-refresher-content></ion-refresher-content></ion-refresher>");
+
+                // } catch(err){}
+
+            } else {
+                // try{
+                    iframe.getElementsByClassName("footer-bar")[0].remove();
+
+                    var element = iframe.getElementsByClassName("topbar-wrap")[0];
+                    var element2 = iframe.getElementsByClassName("page-content")[0];
+                    var parent = element.parentNode;
+                    var ioncontent = iframe.createElement('ion-app');
+                    parent.replaceChild(ioncontent, element);
+                    ioncontent.appendChild(element);
+                    ioncontent.appendChild(element2);
+
+                    // -----------------
+
+                    var element = iframe.getElementsByClassName("topbar-wrap")[0];
+                    var parent = element.parentNode;
+                    var ioncontent = iframe.createElement('ion-header');
+                    parent.replaceChild(ioncontent, element);
+                    ioncontent.appendChild(element);
+
+                    // -----------------
+
+                    var element = iframe.getElementsByClassName("page-content")[0];
+                    var parent = element.parentNode;
+                    var ioncontent = iframe.createElement('ion-content');
+                    parent.replaceChild(ioncontent, element);
+                    ioncontent.appendChild(element);
+
+                    jiframe.find("ion-content").prepend("<ion-refresher slot='fixed' id='refresher'><ion-refresher-content></ion-refresher-content></ion-refresher>");
+                    jiframe.find(".topbar").prepend("<div id='top_loader'></div>");
+
+                // } catch(err){}
+            }
+    
+            
+
+
+            // After loaded
+
+        const refresher = iframe.getElementById('refresher');
+
+        refresher.addEventListener('ionRefresh', () => {
+            setTimeout(() => {
+
+                //        prependMessages(5, true);
+                // location.reload();
+                document.getElementById('main_iframe').contentDocument.location.reload(true);
+                refresher.complete();
+            }, 2000);
+        });
+
+
+
+        //        Loading bar
+        jiframe.find("a").click(function() {
+            if ( jiframe.find(this).attr("href") != undefined &&  jiframe.find(this).attr("href") != "#") {
+                console.log("click");
+                loading();
+            }
+        });
+
+        var i = 0;
+
+        function loading() {
+        if (i == 0) {
+            i = 1;
+            var elem = jiframe.find("#top_loader");
+            var width = 1;
+            var id = setInterval(frame, 50);
+            
+            elem.css("background-color", "#2d7fff");
+
+            function frame() {
+                if (width >= 95) {
+        //                        elem.css("background-color", "#253992");
+        //                        elem.css("width", "100%");
+                    clearInterval(id);
+                    i = 0;
+                } else {
+                    width++;
+                    elem.css("width", width + "%");
+                }
+            }
+        }
+        }
+
+
+        }
+    </script>
+
+</body>
+
+</html>

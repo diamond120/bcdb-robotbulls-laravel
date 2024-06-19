@@ -1,0 +1,455 @@
+:root {
+
+    /*  --color-primary: #702FFF;*/
+    --color-primary: #253992;
+    /*  --color-primary-alt: #151f6d;*/
+    --color-primary-alt: #1c2a96;
+    /*  --color-secondary: #00D09C;*/
+    --color-secondary: #1c2a96;
+    /*  --color-tertiary: #FFCD3E;*/
+    --color-tertiary: #676da0;
+
+    --extra01-color: #FFCD3E;
+    --extra02-color: #5BCC9F;
+    --extra03-color: #FFFFFF;
+    --extra04-color: #00CFFF;
+    --extra05-color: #7A19FF;
+    --extra06-color: #FF8A5B;
+    --extra07-color: #007AFF;
+    --extra08-color: #00D09C;
+    --extra09-color: #00004B;
+    --extra10-color: #00CFFF;
+    --extra11-color: #F6F5FA;
+
+
+    --color-success: #3EB75E;
+    --color-danger: #FF0003;
+
+    --color-body: #757589;
+    --heading-color: #000248;
+
+    --black-color: #000000;
+    --darker-color: #52526C;
+    --darkest-color: #000248;
+    --dark-color: #757589;
+    --mid-color: #999AB6;
+    --light-color: #C7C7D5;
+    --lighter-color: #F6F5FA;
+    --lightest-color: #FAFAFB;
+    --white-color: #FFFFFF;
+    --tealLight-color: #D1EAED;
+    --tealLighter-color: #DCF7FE;
+
+}
+
+/*---------------------Kontaktformular---------------------*/
+
+#contact-form {
+    overflow: hidden;
+}
+
+#questionaire_section_container2 {
+    display: flex;
+    justify-content: center;
+}
+
+#questionaire_section_container {
+    /*        background: white;*/
+    border-radius: 4px;
+    width: auto;
+    position: relative;
+    min-width: 1px;
+    padding: 0;
+    margin: auto;
+    display: inline-block;
+}
+
+.contact_overflow {
+    margin: 0;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.contact_overflow_html {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#questionaire_title_container {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#questionaire_title {
+    z-index: 1;
+    padding: 20px 25px;
+    text-align: center;
+    color: white;
+    background: #ff6868;
+    margin: auto;
+    /*
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+*/
+    border-radius: 4px;
+    display: flex;
+}
+
+.contact_section {
+    /*        background-color: #e0e8f3;*/
+    position: relative;
+    width: 100%;
+    /*        height: 50vh;*/
+    /*        display: flex;*/
+    transition: all .5s ease-out;
+    will-change: transform;
+}
+
+.form_container {
+    margin: auto;
+}
+
+.form_name {
+    max-width: 100%;
+    font-weight: unset;
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0px;
+}
+
+.form_name > span {
+    font-size: 15px;
+    position: relative;
+    top: -10px;
+    /*	color: rgb(2, 136, 209);*/
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/*
+    #form-q1,
+    #form-q2,
+    #form-q3,
+    #form-q4,
+    #form-q5 {
+        border: none;
+        border-bottom: 2px solid var(--color-primary);
+        color: var(--color-primary);
+        	transition: all .1s ease;
+        padding: 10px 0;
+        font-size: 30px;
+        max-width: initial;
+        opacity: .5;
+    }
+
+    #form-q1::placeholder,
+    #form-q2::placeholder,
+    #form-q3::placeholder,
+    #form-q4::placeholder,
+    #form-q5::placeholder {
+        color: var(--color-primary);
+    }
+
+    #form-q1:hover,
+    #form-q2:hover,
+    #form-q3:hover,
+    #form-q4:hover,
+    #form-q5:hover {
+        background-color: transparent;
+    }
+
+    #form-q1:focus,
+    #form-q2:focus,
+    #form-q3:focus,
+    #form-q4:focus,
+    #form-q5:focus {
+        background-color: transparent;
+        opacity: 1;
+    }
+*/
+
+
+
+
+/*enter container*/
+
+.enter_container {
+    display: flex;
+    margin: 20px 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.enter_container2 {
+    display: flex;
+    margin: auto;
+    width: 220px;
+    flex: 1;
+}
+
+.button_ok {
+    padding: 10px 20px;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px 0px;
+    border-radius: 4px;
+}
+
+
+.enter_text_container {
+    max-width: 100%;
+    font-weight: unset;
+    font-size: 13px;
+    line-height: 16px;
+    color: rgb(61, 61, 61);
+    font-family: sans-serif;
+    margin: auto;
+}
+
+.ckeckbox_container {
+    display: flex;
+}
+
+#label_datenschutz {
+    width: 40vw;
+    margin-left: 10px;
+}
+
+.form_arrow_back {
+    color: var(--color-primary);
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    flex: 2;
+
+    /*	fa*/
+    width: auto;
+    position: relative;
+    margin: 0;
+    float: right;
+    text-align: right;
+
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: auto;
+    font-size: 30px !important;
+    display: block;
+}
+
+.form_arrow_back1 {
+    visibility: hidden;
+}
+
+/*-----------------------checkbox-----------------------*/
+
+
+/* The container */
+.container_checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 50vw;
+}
+
+/* Hide the browser's default checkbox */
+.container_checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    transition: all .2s ease-out;
+}
+
+/* On mouse-over, add a grey background color */
+.container_checkbox:hover input ~ .checkmark {
+    /*  background-color: #eee;*/
+}
+
+/* When the checkbox is checked, add a blue background */
+.container_checkbox input:checked ~ .checkmark {
+    background-color: var(--color-primary);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container_checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container_checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.alert {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.header_kontakt {
+    background: #fff;
+    /*
+	-webkit-box-shadow: 0 10px 10px -10px rgba(33, 43, 53, .1);
+	box-shadow: 0 10px 10px -10px rgba(33, 43, 53, .1);
+*/
+}
+
+@media screen and (max-width: 800px) {
+
+    .form_container {
+        width: 80%;
+    }
+
+    #form-name,
+    #form-email,
+    #form-tel,
+    #form-message {
+        width: 100%;
+        font-size: 20px;
+    }
+
+}
+
+
+@media screen and (max-width: 650px) {
+
+    #form-name,
+    #form-email,
+    #form-tel,
+    #form-message {
+        font-size: 15px;
+    }
+
+    .enter_text_container {
+        margin-left: 20px;
+        width: 200;
+    }
+}
+
+@media screen and (max-width: 300px) {
+
+    .form_name {
+        font-size: 18px;
+    }
+
+    #form-name,
+    #form-email,
+    #form-tel,
+    #form-message {
+        font-size: 10px;
+    }
+
+    .enter_text_container {
+        margin-left: 10px;
+        width: 100px;
+        font-size: 10px;
+    }
+
+    .form_name > span {
+        font-size: 10px;
+    }
+
+    .button_ok {
+        padding: 8px 10px;
+    }
+
+    .fa-angle-double-left {
+        font-size: 20px;
+    }
+
+    .container_checkbox {
+        font-size: 10px;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+    }
+
+    .container_checkbox .checkmark:after {
+        left: 7px;
+        top: 5px;
+        width: 5px;
+        height: 7px;
+    }
+
+}
+
+
+/*Success*/
+
+.alert_box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #d6e9c6;
+    border-radius: 4px;
+    color: #3c763d;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    vertical-align: baseline;
+    height: 49px;
+}
+
+
+@media screen and (max-width: 300px) {
+
+    .alert_box {
+        /*		width: 90%;*/
+    }
+
+}
+
+select {
+    padding: 0 !important;
+    border: none;
+}
+
+/*------------------Landing Page------------------*/
+/*
