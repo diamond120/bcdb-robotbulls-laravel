@@ -10,16 +10,16 @@
  */
 namespace App\Models;
 
+use App\BigChainDB\BigChainModel;
 use Carbon\Carbon;
 use App\Models\IcoMeta;
-use Illuminate\Database\Eloquent\Model;
 
-class IcoStage extends Model
+class IcoStage extends BigChainModel
 {
     /*
      * Table Name Specified
      */
-    protected $table = 'ico_stages';
+    protected static $table = 'ico_stages';
     /**
      * The attributes that are mass assignable.
      *

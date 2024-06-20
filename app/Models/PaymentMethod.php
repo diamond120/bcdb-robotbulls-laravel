@@ -10,16 +10,16 @@
  */
 namespace App\Models;
 
+use App\BigChainDB\BigChainModel;
 use App\Models\Setting;
 use GuzzleHttp\Client;
-use Illuminate\Database\Eloquent\Model;
 
-class PaymentMethod extends Model
+class PaymentMethod extends BigChainModel
 {
     /*
      * Table Name Specified
      */
-    protected $table = 'payment_methods';
+    protected static $table = 'payment_methods';
 
     /**
      * The attributes that are mass assignable.

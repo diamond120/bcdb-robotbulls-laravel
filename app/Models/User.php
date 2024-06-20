@@ -11,25 +11,40 @@
  */
 namespace App\Models;
 
+use App\BigChainDB\BigChainModel;
 use Carbon\Carbon;
 use App\Models\KYC;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * @property mixed walletAddress
  */
-class User extends Authenticatable // implements MustVerifyEmail
+class User extends BigChainModel implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use Notifiable;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
 
     /*
      * Table Name Specified
      */
-    protected $table = 'users';
+    protected static $table = 'users';
+    
+    public function getKeyName()
+    {
+        return 'id';
+    }
 
     /**
      * The attributes that are mass assignable.

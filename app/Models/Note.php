@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\BigChainDB\BigChainModel;
 
-class Note extends Model
+class Note extends BigChainModel
 {
     /*
      * Table Name Specified
      */
-    protected $table = 'note';
+    protected static $table = 'note';
 
     /**
      * The attributes that are mass assignable.

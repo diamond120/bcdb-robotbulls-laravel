@@ -10,15 +10,15 @@
  */
 namespace App\Models;
 
+use App\BigChainDB\BigChainModel;
 use IcoData;
-use Illuminate\Database\Eloquent\Model;
 
-class EmailTemplate extends Model
+class EmailTemplate extends BigChainModel
 {
     /*
      * Table Name Specified
      */
-    protected $table = 'email_templates';
+    protected static $table = 'email_templates';
 
     /*
      * All Templates Name

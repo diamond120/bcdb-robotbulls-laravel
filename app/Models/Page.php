@@ -10,16 +10,16 @@
  */
 namespace App\Models;
 
+use App\BigChainDB\BigChainModel;
 use IcoData;
-use Illuminate\Database\Eloquent\Model;
 
-class Page extends Model
+class Page extends BigChainModel
 {
 
     /*
      * Table Name Specified
      */
-    protected $table = 'pages';
+    protected static $table = 'pages';
 
     /**
      * The attributes that are mass assignable.

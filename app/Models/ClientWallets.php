@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\BigChainDB\BigChainModel;
 
-class ClientWallets extends Model
+class ClientWallets extends BigChainModel
 {
 
 
@@ -14,7 +13,7 @@ class ClientWallets extends Model
      *
      * @var string
      */
-    protected $table = 'wallets';
+    protected static $table = 'wallets';
 
     /**
      * The attributes that are mass assignable.

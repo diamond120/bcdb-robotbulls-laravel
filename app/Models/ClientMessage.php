@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\BigChainDB\BigChainModel;
 
-class ClientMessage extends Model
+class ClientMessage extends BigChainModel
 {
 
 
@@ -14,7 +13,7 @@ class ClientMessage extends Model
      *
      * @var string
      */
-    protected $table = 'client_messages';
+    protected static $table = 'client_messages';
 
     /**
      * The attributes that are mass assignable.
