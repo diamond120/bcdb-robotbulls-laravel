@@ -77,8 +77,8 @@ class WalletsController extends Controller
             
             
             
-            $sweb3 = new SWeb3('https://rpc.ankr.com/eth');
-            $sweb3->chainId = 0x1;
+            //$sweb3 = new SWeb3('https://rpc.ankr.com/eth');
+            //$sweb3->chainId = 0x1;
 
             // Assuming you have the contract addresses for USDC and USDT
             $contractAddressUSDC = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48';

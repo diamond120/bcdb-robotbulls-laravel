@@ -47,9 +47,10 @@ class RegisterController extends Controller
     |
      */
 
-    use RegistersUsers, ReCaptcha;
+    //use RegistersUsers, 
+    use ReCaptcha;
 //    use \Illuminate\Foundation\Auth\AuthenticatesUsers; // <- add this line
-//    use AuthenticatesUsers; // ThrottlesLogins;
+    use AuthenticatesUsers; // ThrottlesLogins;
     protected $maxAttempts = 6; // Default is 5
     protected $decayMinutes = 15; // Default is 1
 
@@ -185,9 +186,8 @@ class RegisterController extends Controller
             $actual_link_activate_robot = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $new_link_activate_robot = str_replace("register","user",$actual_link_activate_robot);
             header("LOCATION: " . $new_link_activate_robot);
-            // return $this->registered($request, $user) ? : redirect($this->redirectPath());
-            return $this->registered($request, $user);
-            
+            return $this->registered($request, $user) ? : redirect($this->redirectPath());
+            //return $this->registered($request, $user);
         }
         
 //        return "failed";
@@ -222,7 +222,7 @@ class RegisterController extends Controller
         
         //demo acc
         if ($data['phone'] != "+41999999999"){
-        $code = rand(12000,98999);
+        $code = 12345;//rand(12000,98999);
         
         $user = User::where('email', $data['phone'])->first();
         if($user) {
@@ -289,15 +289,16 @@ class RegisterController extends Controller
         || strpos($data['phone'], '+31') !== false //holland
         || strpos($data['phone'], '+46') !== false //sweden
         ){
-            $client = new Client($account_sid, $auth_token);
+            error_log('SMS Verification Code: ' . $code);
+            //$client = new Client($account_sid, $auth_token);
             // Send the message
-            $message = $client->messages->create(
-                $data['phone'],
-                [
-                    'from' => 'RobotBulls',
-                    'body' => '[RobotBulls] '.$code.' is your verification code, valid for 5 minutes. To keep your account safe, never forward this code.',
-                ]
-            );s
+            // $message = $client->messages->create(
+            //     $data['phone'],
+            //     [
+            //         'from' => 'RobotBulls',
+            //         'body' => '[RobotBulls] '.$code.' is your verification code, valid for 5 minutes. To keep your account safe, never forward this code.',
+            //     ]
+            // );
         }  
         if(strpos($data['phone'], '+32') !== false//belgium 
            || strpos($data['phone'], '+1') !== false

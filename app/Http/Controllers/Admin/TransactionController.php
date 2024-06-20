@@ -141,9 +141,7 @@ class TransactionController extends Controller
         
         $result = DB::table('coin')->where('date', $t->format('U')."000")->first();
 
-        if ($result != null) {
-            $current_price = $result->close;
-        }
+        $current_price = $result->close ?? 1;
         
         return view('admin.transactions', compact('trnxs', 'users', 'stages', 'pmethods', 'pm_currency', 'gateway', 'is_page', 'pagi', 'current_price'));
     }

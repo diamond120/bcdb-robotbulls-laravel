@@ -150,7 +150,6 @@
                             <ul class="navbar-dropdown">
                                 @if (auth()->user()->id == '1')
                                 <li><a href="{{ route('admin.activities', 'last-week')  }}">Activities</a></li>
-                                <li><a href="{{ route('admin.plans')  }}">Ending Plans Detail</a></li>
                                 @endif
                             </ul>
                         </li>

@@ -96,15 +96,16 @@ class UserController extends Controller
         //rbc_price
         $t = new Datetime('19:30:00');
         $dbrow = DB::table('coin')->where('date', $t->format('U')."000")->first();   
-        $current_price = $dbrow->close;
+        $current_price = $dbrow->close ?? 1;
         
         //get user equity
-        $result = $this->get_user_equity();
-        $equity = $result['equity'];
-        $balance = $result['balance'];
-        $name_of_asset_classes = $result['name_of_asset_classes'];
-        $balance_of_asset_classes = $result['balance_of_asset_classes'];
-        $equity_of_asset_classes = $result['equity_of_asset_classes'];
+        $result = $user->equity;
+        error_log($result);
+        $equity = 0;//$result['equity'];
+        $balance = 0;//$result['balance'];
+        $name_of_asset_classes = [];//$result['name_of_asset_classes'];
+        $balance_of_asset_classes = [];//$result['balance_of_asset_classes'];
+        $equity_of_asset_classes = [];//$result['equity_of_asset_classes'];
         
         //2fa token
         $g2fa = new Google2FA();
