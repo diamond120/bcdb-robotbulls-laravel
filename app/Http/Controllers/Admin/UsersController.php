@@ -44,7 +44,7 @@ class UsersController extends Controller
      */
     public function index(Request $request, $role = '')
 {  
-    if(auth()->user()->id == 1) {
+    if(auth()->user()->role == 'admin') {
     
         $role_data  = '';
         $per_page   = gmvl('user_per_page', 10);
@@ -433,7 +433,7 @@ class UsersController extends Controller
     
     public function name_edit(Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -470,7 +470,7 @@ class UsersController extends Controller
     public function email_edit(Request $request)
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -508,7 +508,7 @@ class UsersController extends Controller
     public function base_currency_edit(Request $request)
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -545,7 +545,7 @@ class UsersController extends Controller
     public function two_fa_edit(Request $request)
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -581,7 +581,7 @@ class UsersController extends Controller
         
     public function ambassador_edit(Request $request) {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -617,7 +617,7 @@ class UsersController extends Controller
     
     public function referral_rights_edit(Request $request) {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -653,7 +653,7 @@ class UsersController extends Controller
     
     public function vip_user_edit(Request $request) {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -689,7 +689,7 @@ class UsersController extends Controller
     
     public function whitelisting_comptete_edit(Request $request) {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -725,7 +725,7 @@ class UsersController extends Controller
     
     public function whitelisting_balance_edit(Request $request) {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
                 
                 $id = $request->input('id');
         
@@ -825,7 +825,7 @@ class UsersController extends Controller
         
         if ($type == 'details') {
             
-            if(auth()->user()->id == 1) {
+            if(auth()->user()->role == 'admin') {
                 $order_by   = (gmvl('user_order_by', 'id')=='token') ? 'tokenBalance' : gmvl('user_order_by', 'id');
                 $ordered    = gmvl('user_ordered', 'DESC');
                 $users = User::where('status', 'active')->whereNotNull('email_verified_at')->where('role', '!=', 'admin')->get();
@@ -875,7 +875,7 @@ class UsersController extends Controller
                             ->where('created_at', '<', date("Y-m-d", strtotime("-12 Month +20 days")));
                         });
                     })
-                    ->when(auth()->user()->id != 1, function($query) {
+                    ->when(auth()->user()->role == 'user', function($query) {
                         $query->whereDoesntHave('tnxUser', function($subQuery) {
                             $subQuery->where('vip_user', 1);
                         });

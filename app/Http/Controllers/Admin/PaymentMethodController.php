@@ -37,7 +37,7 @@ class PaymentMethodController extends Controller
     public function index()
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
             
         $payments = PaymentMethod::get_data();
         $gateway = PaymentMethod::Currency;

@@ -47,7 +47,7 @@ class AdminController extends Controller
         }
 
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
             $get_tnx = ($request->get('chart') ? $request->get('chart') : 30) - 1;
             $get_user = ($request->get('user') ? $request->get('user') : 30) - 1;
             $stage = \App\Models\IcoStage::dashboard();

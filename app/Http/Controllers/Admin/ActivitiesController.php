@@ -39,7 +39,7 @@ class ActivitiesController extends Controller
      */
     public function index(Request $request, $role = '')
 {
-    if(auth()->user()->id == 1) {
+    if(auth()->user()->role == 'admin') {
         
         $role_data  = '';
         $per_page   = gmvl('user_per_page', 10);

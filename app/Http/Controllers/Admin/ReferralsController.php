@@ -42,7 +42,7 @@ class ReferralsController extends Controller
      * @return void
      */
     public function index(Request $request, $role = ''){
-        if(auth()->user()->id == 1 || auth()->user()->referral_rights == 1) {
+        if(auth()->user()->role == 'admin' || auth()->user()->referral_rights == 1) {
 
             $role_data  = '';
             $per_page   = gmvl('user_per_page', 10);
@@ -95,7 +95,7 @@ class ReferralsController extends Controller
 
                 }
 
-                if (auth()->user()->id != 1 || $role == "ambassadors") {
+                if (auth()->user()->role == 'user' || $role == "ambassadors") {
                     if ($referrer->ambassador != 1) {
                         continue;
                     }

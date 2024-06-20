@@ -23,7 +23,7 @@ class LanguageController extends Controller
     public function index()
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
         $languages = Language::all();
         return view("admin.languages", compact('languages'));

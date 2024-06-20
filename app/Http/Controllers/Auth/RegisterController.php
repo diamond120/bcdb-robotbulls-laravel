@@ -186,7 +186,7 @@ class RegisterController extends Controller
             $actual_link_activate_robot = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $new_link_activate_robot = str_replace("register","user",$actual_link_activate_robot);
             header("LOCATION: " . $new_link_activate_robot);
-            return $this->registered($request, $user) ? : redirect($this->redirectPath());
+            return redirect($this->redirectPath());
             //return $this->registered($request, $user);
         }
         

@@ -29,7 +29,7 @@ class SettingController extends Controller
      */
     public function index() {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
             
         $timezones = IcoHandler::get_timezones();
         return view('admin.settings', compact('timezones'));

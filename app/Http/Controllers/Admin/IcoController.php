@@ -28,7 +28,7 @@ class IcoController extends Controller
     }
     public function index()
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
         $stages = IcoStage::whereNotIn('status', ['deleted'])->get();
         return view('admin.ico-stage', compact('stages'));

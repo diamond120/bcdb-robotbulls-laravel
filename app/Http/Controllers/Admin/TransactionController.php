@@ -40,7 +40,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request, $status = '')
     {
-        if(auth()->user()->id != 1 && $status != 'expiring') {
+        if(auth()->user()->role == 'user' && $status != 'expiring') {
             // Redirecting to the 'expiring' status page
             return redirect()->route('admin.transactions', 'expiring');
         } 
@@ -68,16 +68,16 @@ class TransactionController extends Controller
             ->where(function($query) {
                 $query->where(function($query) {
                     $query->where('duration', "3 Month")
-                    ->where('created_at', '<', date("Y-m-d", strtotime("-3 Month +".((auth()->user()->id == 1) ? 20 : 20)." days")));
+                    ->where('created_at', '<', date("Y-m-d", strtotime("-3 Month +".((auth()->user()->role == 'admin') ? 20 : 20)." days")));
                 })->orWhere(function($query) {
                     $query->where('duration', "6 Month")
-                    ->where('created_at', '<', date("Y-m-d", strtotime("-6 Month +".((auth()->user()->id == 1) ? 20 : 20)." days")));
+                    ->where('created_at', '<', date("Y-m-d", strtotime("-6 Month +".((auth()->user()->role == 'admin') ? 20 : 20)." days")));
                 })->orWhere(function($query) {
                     $query->where('duration', "12 Month")
-                    ->where('created_at', '<', date("Y-m-d", strtotime("-12 Month +".((auth()->user()->id == 1) ? 20 : 20)." days")));
+                    ->where('created_at', '<', date("Y-m-d", strtotime("-12 Month +".((auth()->user()->role == 'admin') ? 20 : 20)." days")));
                 });
             })
-            ->when(auth()->user()->id != 1, function($query) {
+            ->when(auth()->user()->role == 'user', function($query) {
                 $query->whereDoesntHave('tnxUser', function($subQuery) {
                     $subQuery->where('vip_user', 1);
                 });
@@ -151,7 +151,7 @@ class TransactionController extends Controller
         if ($trnx_id == '') {
             return __('messages.wrong');
         } else {
-            if(auth()->user()->id == 1) {
+            if(auth()->user()->role == 'admin') {
                 $trnx = Transaction::FindOrFail($trnx_id);
                 return view('admin.trnx_details', compact('trnx'))->render();
             } else {
@@ -177,7 +177,7 @@ class TransactionController extends Controller
                             ->where('created_at', '<', date("Y-m-d", strtotime("-12 Month +20 days")));
                         });
                     })
-                    ->when(auth()->user()->id != 1, function($query) {
+                    ->when(auth()->user()->role == 'user', function($query) {
                         $query->whereDoesntHave('tnxUser', function($subQuery) {
                             $subQuery->where('vip_user', 1);
                         });
@@ -195,7 +195,7 @@ class TransactionController extends Controller
 
     
     public function reinvest2(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
             if (version_compare(phpversion(), '7.1', '>=')) {
                 ini_set('precision', 17);
                 ini_set('serialize_precision', -1);
@@ -329,7 +329,7 @@ class TransactionController extends Controller
 
 
     public function reinvest(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
             ini_set('serialize_precision', -1);
@@ -450,7 +450,7 @@ class TransactionController extends Controller
     }
 
     public function withdraw(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
             ini_set('serialize_precision', -1);
@@ -516,7 +516,7 @@ class TransactionController extends Controller
 }
 
     public function trnx_edit_status(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
             $trnx_id = $request->id;
             $trnx = Transaction::FindOrFail($trnx_id);
@@ -548,7 +548,7 @@ class TransactionController extends Controller
         }
     
     public function trnx_edit_plan(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
             $trnx_id = $request->id;
             $trnx = Transaction::FindOrFail($trnx_id);
@@ -580,7 +580,7 @@ class TransactionController extends Controller
         }
 
     public function trnx_edit_duration(Request $request) {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
             $trnx_id = $request->id;
             $trnx = Transaction::FindOrFail($trnx_id);
@@ -621,7 +621,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
             ini_set('serialize_precision', -1);
@@ -683,7 +683,7 @@ class TransactionController extends Controller
      */
     private function canceled_tnx($trnx, $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         $ret['msg'] = 'warning';
         $ret['message'] = __('Unable to cancel the transaction, reload the page.');
         if ($trnx) {
@@ -723,7 +723,7 @@ class TransactionController extends Controller
      */
     private function approved_tnx($trnx, $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         $ret['msg'] = 'warning';
         $ret['message'] = __('Unable to approve the transaction, reload the page.');
 
@@ -827,7 +827,7 @@ class TransactionController extends Controller
      */
     private function deleted_tnx($trnx)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         $ret['msg'] = 'warning';
         $ret['message'] = __('Unable to delete the transaction, reload the page.');
 
@@ -861,7 +861,7 @@ class TransactionController extends Controller
      */
     protected function refund(Transaction $transaction, $message = '')
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if(empty($transaction->refund)){
             $refund = new Transaction();
             $refund->fill($transaction->only([
@@ -900,7 +900,7 @@ class TransactionController extends Controller
      */
     protected function refund_email($refund, $transaction)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         try {
             $refund->tnxUser->notify(new Refund($refund, $transaction));
             return true;
@@ -922,7 +922,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
             ini_set('serialize_precision', -1);
@@ -1040,7 +1040,7 @@ class TransactionController extends Controller
 
     public function change(Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
             ini_set('serialize_precision', -1);
@@ -1273,7 +1273,7 @@ class TransactionController extends Controller
 
     public function adjustment(Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         $validator = Validator::make($request->all(), [
             'tnx_id' => 'required|integer',
         ]);
@@ -1300,7 +1300,7 @@ class TransactionController extends Controller
 
     public function checkStatus (Request $request)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         $tnx = $request->get('tid');
         $transaction = Transaction::where('id', $tnx)->first();
         if (blank($transaction) || ($transaction->status == 'approved')) {
@@ -1374,7 +1374,7 @@ class TransactionController extends Controller
                 ->whereBetween('created_at', [$past, $tomorrow->copy()->subMonths(12)->endOfDay()]);
             });
         })
-        ->when(auth()->user()->id != 1, function($query) {
+        ->when(auth()->user()->role == 'user', function($query) {
             $query->whereDoesntHave('tnxUser', function($subQuery) {
                 $subQuery->where('vip_user', 1);
             });

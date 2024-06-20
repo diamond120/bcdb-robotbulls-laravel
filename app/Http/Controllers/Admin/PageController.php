@@ -27,7 +27,7 @@ class PageController extends Controller
     public function index()
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
             
         $pages = Page::where('status', '!=', 'inactive')->orderBy('id', 'ASC')->get();
         return view('admin.pages', compact('pages'));

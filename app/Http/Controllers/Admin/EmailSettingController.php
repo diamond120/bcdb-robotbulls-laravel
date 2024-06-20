@@ -24,7 +24,7 @@ class EmailSettingController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         // var_dump(config('mail'));
         $templates = EmailTemplate::orderBy('slug', 'ASC')->get();
         $admins = User::where('role', 'admin')->get();

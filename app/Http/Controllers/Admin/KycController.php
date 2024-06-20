@@ -21,7 +21,7 @@ class KycController extends Controller
     public function index(Request $request, $status = '')
     {
         
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
             $per_page   = gmvl('kyc_per_page', 10);
             $ordered    = gmvl('kyc_ordered', 'DESC');
@@ -59,7 +59,7 @@ class KycController extends Controller
      */
     public function get_documents($id, $doc)
     {
-        if(auth()->user()->id == 1) {
+        if(auth()->user()->role == 'admin') {
         
             $filename = KYC::FindOrFail($id)->document;
             if ($doc == 2) {
@@ -99,7 +99,7 @@ class KycController extends Controller
      */
     public function show($id = '', $type = '')
     {
-        if(auth()->user()->id != 1) {
+        if(auth()->user()->role == 'user') {
             return redirect()->route('admin.kycs', 'pending');
         }
         
