@@ -17,7 +17,7 @@
                             <strong class="text-dark">{{ set_id($refer->id).' - '.$refer->name }}</strong>
                             <span class="small">{{ $refer->email }}</span>
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <div class="col-md col-6 text-right text-md-left"><a target="_blank" href="{{ route('admin.users.view', [$refer->id, 'details'] ) }}">{{'view_user'}}</a></div>
                         @endif
                         <div class="col-md col-sm-6">

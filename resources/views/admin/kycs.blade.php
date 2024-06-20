@@ -23,14 +23,14 @@
                     </div>
                 </div>
                 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                 <div class="page-nav-wrap">
                     <div class="page-nav-bar justify-content-between bg-lighter">
                         <div class="page-nav w-100 w-lg-auto">
                             <ul class="nav">
                                 <li class="nav-item{{ (is_page('kyc-list.pending') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.kycs', 'pending') }}">Pending</a></li>
 
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li class="nav-item{{ (is_page('kyc-list.missing') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.kycs', 'missing') }}">Missing</a></li>
 
                                 <li class="nav-item{{ (is_page('kyc-list.approved') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.kycs', 'approved') }}">Approved</a></li>
@@ -50,7 +50,7 @@
                         <div class="tools w-100 w-sm-auto">
                             <ul class="btn-grp guttar-8px">
                                 <li><a href="#" class="btn btn-light btn-sm btn-icon btn-outline bg-white advsearch-opt"> <em class="ti ti-panel"></em> </a></li>
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li>
                                     <div class="relative">
                                         <a href="#" class="btn btn-light bg-white btn-sm btn-icon toggle-tigger btn-outline"><em class="ti ti-server"></em> </a>
@@ -192,7 +192,7 @@
                             <td class="data-col dt-user">
                                 <span class="d-none">{{ $kyc->status }}</span>
                                 <span class="lead user-name">
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <a href="{{ route('admin.users.view', [$kyc->userId, 'details'] ) }}" target="_blank">{{ _x($kyc->firstName).' '._x($kyc->lastName) }}</a>
                                     @else
                                     <span>{{ _x($kyc->firstName).' '._x($kyc->lastName) }}</span>
@@ -252,7 +252,7 @@
                                     <a href="#" class="btn btn-light-alt btn-xs btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                                     <div class="toggle-class dropdown-content dropdown-content-top-left">
                                         <ul class="dropdown-list more-menu more-menu-{{$kyc->id}}">
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <li><a href="{{route('admin.kyc.view', [$kyc->id, 'kyc_details' ])}}"><em class="ti ti-eye"></em> View Details</a></li>
                                             @endif
                                             @if($kyc->status != 'approved')
@@ -275,7 +275,7 @@
                 @else 
                     <div class="bg-light text-center rounded pdt-5x pdb-5x">
                         <p><em class="ti ti-server fs-24"></em><br>{{ ($is_page=='all') ? 'No KYC application found!' : 'No '.$is_page.' KYC application here!' }}</p>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <p><a class="btn btn-primary btn-auto" href="{{ route('admin.kycs') }}">View All KYC Application</a></p>
                         @endif
                     </div>

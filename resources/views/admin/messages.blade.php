@@ -46,7 +46,7 @@ use App\Models\User;
 -->
                 </div>
 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                 <div class="page-nav-wrap">
                     <div class="page-nav-bar justify-content-between bg-lighter">
                         <div class="page-nav w-100 w-lg-auto">
@@ -370,7 +370,7 @@ use App\Models\User;
                                             @if($client)
                                             <li><a href="{{ route('admin.users.view', [$client->id, 'details'] ) }}"><em class="fa fa-user"></em> User Details</a></li>
                                             
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <li><a class="user-email-action" href="#EmailUser" data-uid="{{ $client->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Send Email</a></li>
                                             @endif
                                             @endif
@@ -392,7 +392,7 @@ use App\Models\User;
                                             <li><a href="javascript:void(0)" data-uid="{{ $client->id }}" data-type="referrals" class="user-form-action user-action"><em class="fas fa-users"></em>Referrals</a></li>
                                             @endif
                                             
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             @if($client)
                                             @if($client->id != save_gmeta('site_super_admin')->value)
                                             <li><a class="user-form-action user-action" href="#" data-type="reset_pwd" data-uid="{{ $client->id }}" ><em class="fas fa-shield-alt"></em>Reset Pass</a></li>
@@ -403,7 +403,7 @@ use App\Models\User;
                                             @endif
                                             @endif
                                             
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             @if($client)
                                             @if(Auth::id() != $client->id && $client->id != save_gmeta('site_super_admin')->value) @if($client->status != 'suspend')
                                             <li><a href="#" data-uid="{{ $client->id }}" data-type="suspend_user" class="user-action front"><em class="fas fa-ban"></em>Suspend</a></li>

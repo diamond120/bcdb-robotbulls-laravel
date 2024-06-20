@@ -24,7 +24,7 @@
                     
                 </div>
 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                     <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
                             <div class="page-nav w-100 w-lg-auto">
@@ -64,7 +64,7 @@
                                 <div class="d-flex align-items-center">
                                     <div class="fake-class">
                                         <span class="lead user-name text-wrap">
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <a href="{{ route('admin.users.view', [$referrant['id'], 'details'] ) }}" target="_blank">{{ $referrant['name'] }}</a>
                                             @else
                                             <span href="{{ route('admin.users.view', [$referrant['id'], 'details'] ) }}" target="_blank">{{ $referrant['name'] }}</span>

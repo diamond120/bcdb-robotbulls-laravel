@@ -42,20 +42,20 @@ $trnxs = Transaction::where('user', Auth::id())
                                     <li><a href="javascript:void(0)" data-uid="{{ $user->id }}" data-type="transactions" class="user-form-action user-action"><em class="fas fa-random"></em>Transactions</a></li>
                                     <li><a href="javascript:void(0)" data-uid="{{ $user->id }}" data-type="activities" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>Activities</a></li>
                                     <li><a href="javascript:void(0)" data-uid="{{ $user->id }}" data-type="referrals" class="user-form-action user-action"><em class="fas fa-users"></em>Referrals</a></li>
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a class="user-email-action" href="#Referrant" data-uid="{{ $user->id }}" data-toggle="modal"><em class="fas fa-address-book"></em>Referrant</a></li>
                                     @endif
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a class="user-email-action" href="#EmailUser" data-uid="{{ $user->id }}" data-toggle="modal"><em class="far fa-envelope"></em>Send Email</a></li>
                                     @endif
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a class="user-email-action" href="#SMSUser" data-uid="{{ $user->id }}" data-toggle="modal" onclick="openMessageModalAndSetName( {{$user->id}}, '{{$user->name}}' )"><em class="far fa-bell"></em>Send Message</a></li>
                                     @endif
                                             
                                     <li><a class="user-email-action view-messages" href="#pastMessages" data-uid="{{ $user->id }}" data-toggle="modal" onclick="openMessageModalAndSetName2( {{$user->id}}, '{{$user->name}}' )"><em class="fa fa-table"></em>Past Messages</a></li>
                                     
                                     @if($user->id != save_gmeta('site_super_admin')->value)
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a class="user-form-action user-action d-none" href="#" data-type="reset_pwd" data-uid="{{ $user->id }}" ><em class="fas fa-shield-alt"></em>Reset Pass</a></li>
                                     @endif
                                     @endif
@@ -67,12 +67,12 @@ $trnxs = Transaction::where('user', Auth::id())
                                     @if(Auth::id() != $user->id && $user->id != save_gmeta('site_super_admin')->value)
                                     
                                     @if($user->status != 'suspend')
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a href="#" data-uid="{{ $user->id }}" data-type="suspend_user" class="user-action"><em class="fas fa-ban"></em>Suspend</a></li>
                                     @endif
                                         
                                     @else
-                                    @if (auth()->user()->id == '1')
+                                    @if (auth()->user()->role == 'admin')
                                     <li><a href="#" data-uid="{{ $user->id }}" data-type="active_user" class="user-action"><em class="fas fa-ban"></em>Active</a></li>
                                     @endif
                                     @endif
@@ -117,7 +117,7 @@ $trnxs = Transaction::where('user', Auth::id())
                             $kyc_a_af = isset($user->kyc_info->id) ? '</a>' : '';
                         @endphp 
                         @if($user->role != 'admin')
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <li>{!! $kyc_a_bf !!}<div class="data-state data-state-sm data-state-{{ !empty($user->kyc_info) ? $user->kyc_info->status : 'missing' }}"></div>KYC {!! $kyc_a_af !!}</li>
                         @endif
                         @endif
@@ -129,13 +129,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Full Name</div>
                         <div class="data-details-des d-block">{!! $user->name ? $user->name : '&nbsp;' !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="name_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form name_form" action="{{ route('admin.ajax.users.name_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -148,13 +148,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Email Address</div>
                         <div class="data-details-des email_value d-block">{!! explode_user_for_demo($user->email, auth()->user()->type) !!} 
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="email_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form email_form" action="{{ route('admin.ajax.users.email_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -205,13 +205,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Default Curr</div>
                         <div class="data-details-des d-block">{!! $user->base_currency !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="base_currency_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form base_currency_form" action="{{ route('admin.ajax.users.base_currency_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -224,13 +224,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">2FA Enabled</div>
                         <div class="data-details-des d-block">{!! $user->google2fa==1 ? 'Yes' : 'No' !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="two_fa_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form two_fa_form" action="{{ route('admin.ajax.users.two_fa_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -244,13 +244,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Ambassador</div>
                         <div class="data-details-des d-block">{!! $user->ambassador==1 ? 'Yes' : 'No' !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="ambassador_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form ambassador_form" action="{{ route('admin.ajax.users.ambassador_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -261,7 +261,7 @@ $trnxs = Transaction::where('user', Auth::id())
                         @endif
                     </li>{{-- li --}}
                     
-                    @if (auth()->user()->id == '1')
+                    @if (auth()->user()->role == 'admin')
                     <li>
                         <div class="data-details-head">VIP User</div>
                         <div class="data-details-des d-block">{!! $user->vip_user==1 ? 'Yes' : 'No' !!}
@@ -283,13 +283,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Whitelisting Complete</div>
                         <div class="data-details-des d-block">{!! $user->whitelisting_comptete !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="whitelisting_comptete_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form whitelisting_comptete_form" action="{{ route('admin.ajax.users.whitelisting_comptete_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -304,13 +304,13 @@ $trnxs = Transaction::where('user', Auth::id())
                     <li>
                         <div class="data-details-head">Whitelisting Balance</div>
                         <div class="data-details-des d-block">{!! $user->whitelist_balance !!}
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_user_btn" value="whitelisting_balance_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none user_form whitelisting_balance_form" action="{{ route('admin.ajax.users.whitelisting_balance_edit') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $user->id ? $user->id : '&nbsp;' !!}" name="id">
@@ -323,7 +323,7 @@ $trnxs = Transaction::where('user', Auth::id())
                     
                    
                     
-                    @if (auth()->user()->id == '1' && $user->role =="admin")
+                    @if (auth()->user()->role == 'admin' && $user->role =="admin")
                     <li>
                         <div class="data-details-head">Add Referral Persission for Admins</div>
                         <div class="data-details-des d-block">{!! $user->referral_rights==1 ? 'Yes' : 'No' !!}
@@ -351,7 +351,7 @@ $trnxs = Transaction::where('user', Auth::id())
                         </div>
                     </li>{{-- li --}}
                     
-                    @if (auth()->user()->id == '1')
+                    @if (auth()->user()->role == 'admin')
                     @if($wallet != false)
                     <li>
                         <div class="data-details-head">RobotBulls Wallet Address</div>

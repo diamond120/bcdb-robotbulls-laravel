@@ -61,7 +61,7 @@
                                 
                                     <ul class="user-links">
                                         <li><a href="{{ route('admin.profile') }}"><i class="ti ti-id-badge"></i>My Profile</a></li>
-                                        @if (auth()->user()->id == '1')
+                                        @if (auth()->user()->role == 'admin')
                                         <li><a href="{{ route('admin.profile.activity') }}"><i class="ti ti-eye"></i>Activity</a></li>
                                         @endif
                                     </ul>
@@ -80,11 +80,11 @@
                 <div class="navbar-innr">
                     <ul class="navbar-menu" id="main-nav">
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <li><a href="{{ route('admin.home') }}"><em class="ikon ikon-dashboard"></em> Dashboard</a></li>
                         @endif
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         @if(nio_module()->has('Withdraw') && has_route('withdraw:admin.index') && gup('withdraw'))
                         <li{!! ((is_page('withdraw'))? ' class="active"' : '') !!}>
                             <a href="{{ route('withdraw:admin.index') }}"><em class="ikon ikon-wallet"></em> Withdraw</a>
@@ -94,19 +94,19 @@
                         
                         <!--Client Relations-->
                         
-                        @if (auth()->user()->id != '1')
+                        @if (auth()->user()->role == 'user')
                         <li{!! ((is_page('transactions'))? ' class="active"' : '') !!}>
                             <a href="{{ route('admin.transactions') }}"><em class="ikon ikon-transactions"></em> Transactions</a>
                         </li>
                         @endif
 
-                        @if (auth()->user()->id != '1')
+                        @if (auth()->user()->role == 'user')
                         <li{!! ((is_page('messages'))? ' class="active"' : '') !!}>
                             <a href="{{ route('admin.messages') }}"><em class="ikon ikon-docs"></em> Messages</a>
                         </li>
                         @endif
                         
-                        @if (auth()->user()->id != '1')
+                        @if (auth()->user()->role == 'user')
                         <li{!! ((is_page('users.wallet.change'))? ' class="active"' : '') !!}>
                             <a href="{{ route('admin.users.wallet.change') }}"><em class="ikon ikon-docs"></em> Wallet Change</a>
                         </li>
@@ -121,7 +121,7 @@
                         
                         <!--Superadmin-->
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-docs"></em> Management</a>
                             <ul class="navbar-dropdown">
                                 
@@ -134,7 +134,7 @@
                         </li>
                         @endif
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-user-list"></em> Search</a>
                             <ul class="navbar-dropdown">
                                 <li><a href="{{ route('admin.users', 'user') }}"> Users List</a></li>
@@ -145,10 +145,10 @@
                         @endif
                         
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-sign-ada"></em> Analytics</a>
                             <ul class="navbar-dropdown">
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li><a href="{{ route('admin.activities', 'last-week')  }}">Activities</a></li>
                                 @endif
                             </ul>
@@ -162,7 +162,7 @@
                         </li>
                         @endif
 -->
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         @if(gup('setting'))
                         <li class="has-dropdown"><a class="drop-toggle" href="javascript:void(0)"><em class="ikon ikon-settings"></em> Settings</a>
                             <ul class="navbar-dropdown">

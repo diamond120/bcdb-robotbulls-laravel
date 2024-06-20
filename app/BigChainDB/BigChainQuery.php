@@ -299,8 +299,16 @@ class BigChainQuery
         return $this;
     }
 
+    public static function timestamp($datetime) {
+        if ($datetime instanceof DateTime) return $datetime->getTimestamp();
+        return (new DateTime($datetime))->getTimestamp();
+    }
+
     public function where($column, $operator = null, $value = null)
     {
+        if($column == 'created_at') {
+            $value = is_array($value) ? array_map('self::timestamp', $value) : self::timestamp($value);
+        }
         return $this->addQuery('and', $column, $operator, $value);
     }
 
@@ -317,13 +325,10 @@ class BigChainQuery
     }
 
     public function whereBetween($column, $value) {
-        if($column == 'created_at')
-            $value = [$value[0]->getTimestamp(), $value[1]->getTimestamp()];
-        return $this->where($column, 'between', );
+        return $this->where($column, 'between', $value);
     }
 
     public function whereDate($column, $value) {
-
         return $this->whereBetween($column, [
             new DateTime($value . ' 00:00:00'),
             new DateTime($value . ' 23:59:59')

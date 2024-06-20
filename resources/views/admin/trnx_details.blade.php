@@ -23,7 +23,7 @@
             <div class="card-innr">
                 <div class="card-head d-flex justify-content-between align-items-center">
                     <h4 class="card-title mb-0">Transaction Details <em class="ti ti-angle-right fs-14"></em> <strong><a href="{{ route('admin.users.view', [$trnx->tnxUser->id, 'details'] ) }}" target="_blank">{{ $trnx->tnxUser->name }}</a></strong><em class="ti ti-angle-right fs-14"></em> <small class="tnx-id">{{ $trnx->tnx_id }}</small>
-                    @if (auth()->user()->id == '1')
+                    @if (auth()->user()->role == 'admin')
                         <a href="#" class="btn-sm mt-1" data-toggle="modal" data-target="#changeTnx">
                             <em class="fs-14 ti ti-write"></em>
                         </a>
@@ -33,7 +33,7 @@
                         <div>
                         <a href="{{ (url()->previous()) ? url()->previous() : route('admin.transactions') }}" class="btn btn-sm btn-auto btn-primary"><em class="fas fa-arrow-left"></em><span class="d-sm-inline-block d-none">Back</span></a>
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <div>
                         <a href="/admin/transactions?search={{ $trnx->tnxUser->id }}&by=usr&filter=1" class="btn btn-sm btn-auto btn-primary" target="_blank"><span class="d-sm-inline-block d-none">All Transactions</span> <em class="fas fa-arrow-right"></em></a>
                         </div>
@@ -94,7 +94,7 @@
                 </ul>{{-- .data-details --}}
                 <div class="gaps-3x"></div>
                 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                 <h6 class="card-sub-title">Details</h6>
                 <ul class="data-details-list">
                     
@@ -223,13 +223,13 @@
                     <li>
                         <div class="data-details-head">status</div>
                         <div class="data-details-des d-block"><strong>{{ ucfirst($trnx->status) }}</strong>
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_trnx_btn" value="status_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none trnx_form status_form" action="{{ route('admin.ajax.transactions.trnx_edit_status') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $trnx->id ? $trnx->id : '&nbsp;' !!}" name="id">
@@ -258,13 +258,13 @@
                     <li>
                         <div class="data-details-head">Plan</div>
                         <div class="data-details-des d-block"><strong>{{ ucfirst($trnx->plan) }}</strong>
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_trnx_btn" value="plan_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none trnx_form plan_form" action="{{ route('admin.ajax.transactions.trnx_edit_plan') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $trnx->id ? $trnx->id : '&nbsp;' !!}" name="id">
@@ -277,13 +277,13 @@
                     <li>
                         <div class="data-details-head">Duration</div>
                         <div class="data-details-des d-block"><strong>{{ ucfirst($trnx->duration) }}</strong>
-                            @if (auth()->user()->id == '1')
+                            @if (auth()->user()->role == 'admin')
                             <a href="#" class="ml-3 edit_trnx_btn" value="duration_form">
                                 <em class="fs-14 ti ti-write"></em>
                             </a>
                             @endif
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <form class="d-none trnx_form duration_form" action="{{ route('admin.ajax.transactions.trnx_edit_duration') }}" method="POST">
                             @csrf
                             <input class="d-none" value="{!! $trnx->id ? $trnx->id : '&nbsp;' !!}" name="id">
@@ -308,7 +308,7 @@
 @endsection
 
 @section('modals')
-@if (auth()->user()->id == '1')
+@if (auth()->user()->role == 'admin')
 <div class="modal fade" id="changeTnx">
     <div class="modal-dialog modal-dialog-md modal-dialog-centered">
         <div class="modal-content">

@@ -303,20 +303,19 @@ class User extends BigChainModel implements
      */
     public static function dashboard($get = 15)
     {
-        $kyc = new KYC;
         Carbon::setWeekStartsAt(Carbon::MONDAY);
         Carbon::setWeekEndsAt(Carbon::SUNDAY);
 
         $data['all'] = self::count();
         $data['last_week'] = self::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
-        $data['kyc_last_week'] = $kyc->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $data['kyc_last_week'] = KYC::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
 
         $data['unverified'] = ceil(((self::where('email_verified_at', null)->count()) * 100) / self::count());
         $data['verified'] = (100 - $data['unverified']);
-        $data['kyc_submit'] = $kyc->count();
-        $data['kyc_approved'] = $kyc->where('status', 'approved')->count();
-        $data['kyc_pending'] = $kyc->count() > 0 ? ceil((($kyc->where('status', 'pending')->count()) * 100) / $kyc->count()) : 0;
-        $data['kyc_missing'] = $kyc->count() > 0 ? ceil((($kyc->where('status', 'missing')->count()) * 100) / $kyc->count()) : 0;
+        $data['kyc_submit'] = KYC::count();
+        $data['kyc_approved'] = KYC::where('status', 'approved')->count();
+        $data['kyc_pending'] = KYC::count() > 0 ? ceil(((KYC::where('status', 'pending')->count()) * 100) / kYC::count()) : 0;
+        $data['kyc_missing'] = KYC::count() > 0 ? ceil(((KYC::where('status', 'missing')->count()) * 100) / KYC::count()) : 0;
 
         $data['chart'] = self::chart($get);
 

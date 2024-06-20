@@ -41,7 +41,7 @@
                     <td class="data-col data-user">
                         <span class="lead user-name">
                         
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <a href="{{ route('admin.users.view', [$item->user, 'details'] ) }}" target="_blank">{{ $item->user->name }}</a>
                         @else
                         <span>{{ $item->user->name }}</span>

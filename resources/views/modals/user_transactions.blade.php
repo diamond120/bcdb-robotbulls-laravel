@@ -33,7 +33,7 @@ function daysDifferenceFromToday($datetimeString) {
                 <div class="card-head d-flex justify-content-between align-items-center">
                     <h3 class="popup-title">All transactions <em class="ti ti-angle-right"></em> <small class="tnx-id">{{ set_id($user->id) }}</small></h3>
                     <div class="d-flex align-items-center guttar-20px">
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <div class="flex-col d-sm-block d-none">
                             <a href="/admin/transactions?search={{ $user->id }}&by=usr&filter=1" class="btn btn-light btn-sm btn-auto btn-primary" target="_blank"><span class="back">Detailed View</span> <em class="fas fa-arrow-right"></em></a>
                         </div>

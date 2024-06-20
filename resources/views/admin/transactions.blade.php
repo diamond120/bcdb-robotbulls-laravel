@@ -37,7 +37,7 @@
             <div class="card-innr">
                 <div class="card-head has-aside">
                     <h4 class="card-title">{{ ucfirst($is_page) }} Transactions</h4>
-                    @if (auth()->user()->id == '1')
+                    @if (auth()->user()->role == 'admin')
                     <div class="card-opt">
                         <ul class="btn-grp btn-grp-block guttar-20px">
                             <li>
@@ -50,20 +50,20 @@
                     @endif
                 </div>
                 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                 <div class="page-nav-wrap">
                     <div class="page-nav-bar justify-content-between bg-lighter">
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <div class="page-nav w-100 w-lg-auto">
                             <ul class="nav">
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li class="nav-item{{ (is_page('transactions.pending') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'pending') }}">Pending</a></li>
                                 <li class="nav-item {{ (is_page('transactions.approved') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'approved') }}">Approved</a></li>
                                 <li class="nav-item {{ (is_page('transactions.bonuses') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'bonuses') }}">Bonuses</a></li>
                                 <li class="nav-item {{ (is_page('transactions') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions') }}">All</a></li>
                                 @endif
                                 <li class="nav-item {{ (is_page('transactions.expiring') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'expiring') }}">Expiring</a></li>
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li class="nav-item {{ (is_page('transactions.percentage') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'percentage') }}">Percentage</a></li>
                                 <li class="nav-item {{ (is_page('transactions.biggest') ? ' active' : '') }}"><a class="nav-link" href="{{ route('admin.transactions', 'biggest') }}">Biggest</a></li>
                                 @endif
@@ -82,7 +82,7 @@
                             <ul class="btn-grp guttar-8px">
                                 <li><a href="#" class="btn btn-light btn-sm btn-icon btn-outline bg-white advsearch-opt"> <em class="ti ti-panel"></em> </a></li>
                                 @if(is_super_admin())
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li>
                                     <div class="relative">
                                         <a href="#" class="btn btn-light bg-white btn-sm btn-icon toggle-tigger btn-outline"><em class="ti ti-server"></em> </a>
@@ -471,7 +471,7 @@
                                             @endif
                                             
                                         </span>
-                                        @if (auth()->user()->id == '1')
+                                        @if (auth()->user()->role == 'admin')
                                         <span class="sub sub-date" style="color: #cdd2d7;">{{ date('d M, Y', strtotime($trnx->tnx_time)) }}</span>
                                         @endif
                                         <span class="sub sub-date">{{ date('d M, Y', strtotime($trnx->created_at)) }}</span>
@@ -586,7 +586,7 @@
                                             
                                             <li><a class="user-email-action view-messages" href="#pastMessages" data-uid="{{ $user->id }}" data-toggle="modal" onclick="openMessageModalAndSetName2( {{$user->id}}, '{{$user->name}}' )"><em class="fa fa-table"></em>Past Messages</a></li>
                                             
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <form action="{{ route('admin.ajax.transactions.withdraw') }}" method="POST" class="validate-modern d-none" autocomplete="off">
                                                 @csrf
                                                 <input class="input-bordered d-none" required="" type="text" name="trnx_id" value="{{ $trnx->id }}">
@@ -596,7 +596,7 @@
                                             
                                            
                                             
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <form action="{{ route('admin.ajax.transactions.reinvest') }}" method="POST" class="validate-modern d-none" autocomplete="off">
                                                 @csrf
                                                 <input class="input-bordered d-none" required="" type="text" name="trnx_id" value="{{ $trnx->id }}">
@@ -614,7 +614,7 @@
                                                 <em class="fas fa-ban"></em> Reject</a></li>
                                             @endif
                                             @if($trnx->status == 'approved' && $trnx->tnx_type == 'purchase' && $trnx->refund == null)
-                                            @if (auth()->user()->id == '1')
+                                            @if (auth()->user()->role == 'admin')
                                             <li><a href="javascript:void(0)" class="tnx-action" data-type="refund" data-id="{{ $trnx->id }}">
                                                 <em class="fas fa-reply"></em> Refund</a></li>
                                             @endif
@@ -694,7 +694,7 @@
 @endsection
 
 @section('modals')
-@if (auth()->user()->id == '1')
+@if (auth()->user()->role == 'admin')
 <div class="modal fade" id="addTnx">
     <div class="modal-dialog modal-dialog-md modal-dialog-centered">
         <div class="modal-content">
@@ -1083,7 +1083,7 @@
 
 
 
-@if (auth()->user()->id == '1')
+@if (auth()->user()->role == 'admin')
 <div class="modal fade" id="reinvestmodal" tabindex="-1">
     <div class="modal-dialog modal-dialog-md modal-dialog-centered">
         <div class="modal-content">

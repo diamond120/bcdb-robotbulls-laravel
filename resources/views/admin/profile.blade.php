@@ -16,7 +16,7 @@
                         <div class="nav nav-tabs nav-tabs-line">
                             <ul class="nav mb-0" id="myTab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#accountInfo">My Profile</a></li>
-                                @if (auth()->user()->id == '1')
+                                @if (auth()->user()->role == 'admin')
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#secutity">Secutity Settings</a></li>
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#changePassword">Change Password</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ route('admin.profile.activity') }}">Activity</a></li>

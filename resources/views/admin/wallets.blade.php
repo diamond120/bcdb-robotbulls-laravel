@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Crypt;
                     <h4 class="card-title">{{ ucfirst($is_page) }} Wallets</h4>
                 </div>
 
-                @if (auth()->user()->id == '1')
+                @if (auth()->user()->role == 'admin')
                     <div class="page-nav-wrap">
                         <div class="page-nav-bar justify-content-between bg-lighter">
                             <div class="search flex-grow-1 pl-lg-4 w-100 w-sm-auto">

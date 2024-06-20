@@ -17,7 +17,7 @@ $space = "&nbsp;";
                         <div class="flex-col d-sm-none">
                             <a href="{{ route('admin.kycs') }}" class="btn btn-icon btn-sm btn-primary"><em class="fas fa-arrow-left"></em></a>
                         </div>
-                        @if (auth()->user()->id == '1')
+                        @if (auth()->user()->role == 'admin')
                         <div class="relative d-inline-block">
                             <a href="#" class="btn btn-dark btn-sm btn-icon toggle-tigger"><em class="ti ti-more-alt"></em></a>
                             <div class="toggle-class dropdown-content dropdown-content-top-left">
