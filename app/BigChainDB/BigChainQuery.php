@@ -41,7 +41,7 @@ class BigChainQuery
         return [
             'object' => $this->table,
             'join' => $this->join,
-            'where' => $this->queries ? json_encode($this->queries) : null,
+            'where' => $this->queries ? urlencode(json_encode($this->queries)) : null,
             'orderBy' => $this->orders,
             'page' => $this->page,
             'limit' => $this->limit
@@ -101,8 +101,16 @@ class BigChainQuery
 
     public function count()
     {
+        Log::info('GET ' . $this->table . ' QUERY ' . json_encode($this->getParams()));
         $res = self::$driver->get('/count', [ 'query' => $this->getParams() ]);
-        return json_decode($res->getBody()->getContents())->data;
+        $count = json_decode($res->getBody()->getContents())->data;
+        Log::info('RETURN COUNT ' . $count);
+        return (int)$count;
+    }
+
+    public function exists()
+    {
+        return $this->count() > 0;
     }
 
     public function sum($column)
