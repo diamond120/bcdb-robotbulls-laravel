@@ -94,8 +94,9 @@ class PaymentMethod extends BigChainModel
             'cfa' => 'Franc Congolais',
         ];
 
-    public function __construct()
+    public function __construct($attributes = null)
     {
+        parent::__construct($attributes);
         $auto_check = (60 * (int) get_setting('pm_automatic_rate_time', 60)); // 1 Hour
 
         $this->save_default();
@@ -113,7 +114,10 @@ class PaymentMethod extends BigChainModel
     {
         if ($name !== '') {
             $data = self::where('payment_method', $name)->first();
+            
+            error_log('LOG ' . json_encode($data));
             if(! $data) return false;
+            
             $result = (object) [
                 'status' => $data->status,
                 'title' => $data->title,

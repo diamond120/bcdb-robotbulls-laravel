@@ -36,7 +36,7 @@ class Transaction extends BigChainModel
      */
     public function tnxUser()
     {
-        return $this->belongsTo(User::class, 'user', 'id');
+        return User::find($this->user);
     }
 
 
@@ -102,7 +102,7 @@ class Transaction extends BigChainModel
      */
     public static function get_by_own($where=null, $where_not=null) {
         // $return = (empty($where)) ? self::has('user_tnx') : self::has('user_tnx')->where($where);
-        $by_user = self::has('user_tnx');
+        $by_user = self::has('users', 'transactions.user', '=', 'users.id');
         if(!empty($where)) {
             $by_user->where($where);
         }

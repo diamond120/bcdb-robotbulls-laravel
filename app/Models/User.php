@@ -40,6 +40,10 @@ class User extends BigChainModel implements
      * Table Name Specified
      */
     protected static $table = 'users';
+
+    public function getKey() {
+        return $this->id;
+    }
     
     public function getKeyName()
     {
