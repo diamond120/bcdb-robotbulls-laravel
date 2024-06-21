@@ -158,7 +158,7 @@ $sm_class = strlen($stage->stage->total_tokens) > 12 ? ' sm' : '';
                             	@forelse($trnxs->all as $tnx)
                                 <tr>
                                     <td>
-                                        <h5 class="lead mb-1">{{ $tnx->tnxUser->name}}</h5>
+                                        <h5 class="lead mb-1">{{ $tnx->tnxUser()->name}}</h5>
                                         <span class="sub">{{ _date($tnx->tnx_time) }}</span>
                                     </td>
                                     <td class="d-none d-sm-table-cell">

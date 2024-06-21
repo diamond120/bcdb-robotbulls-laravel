@@ -304,7 +304,7 @@ use App\Models\User;
                         
                         @php
                             $client = User::find($item['user_id']);
-                            $date = Carbon::parse($item['message_date']);
+                            $date = Carbon::createFromTimestamp($item['message_date']);
                             $dateInCET = $date->timezone('Europe/Brussels');
                             $channel = $item['channel'];
                             

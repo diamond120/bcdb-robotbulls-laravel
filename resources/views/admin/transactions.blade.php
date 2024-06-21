@@ -452,7 +452,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($trnxs as $trnx)
+                        @foreach($trnxs->getItems() as $trnx)
                         @php 
                             $text_danger = ( $trnx->tnx_type=='refund' || ($trnx->tnx_type=='transfer' && $trnx->extra=='sent') ) ? ' text-danger' : '';
                             $user = $users->find($trnx->user);
@@ -477,7 +477,7 @@
                                         <span class="sub sub-date">{{ date('d M, Y', strtotime($trnx->created_at)) }}</span>
                                         <?php
                                         
-                                            $end_date = (new DateTime($trnx->created_at))->add(new DateInterval('P'.((int) filter_var($trnx->duration, FILTER_SANITIZE_NUMBER_INT)).'M'));
+                                            $end_date = (new DateTime('@' . $trnx->created_at))->add(new DateInterval('P'.((int) filter_var($trnx->duration, FILTER_SANITIZE_NUMBER_INT)).'M'));
 
                                             $now = new DateTime();
                                             $now->add(new DateInterval('P1D'));  // add 1 day to the current date
@@ -504,7 +504,7 @@
                                 </div>
                             </td>
                             <td class="data-col dt-token">
-                                <span class="lead token-amount{{ $text_danger }}"><a href="{{ route('admin.users.view', [$trnx->tnxUser->id, 'details'] ) }}" target="_blank">{{ $trnx->tnxUser->name }} </a>
+                                <span class="lead token-amount{{ $text_danger }}"><a href="{{ route('admin.users.view', [$trnx->tnxUser()->id, 'details'] ) }}" target="_blank">{{ $trnx->tnxUser()->name }} </a>
                                     @if($user->walletType && $user->walletAddress) 
                                         <em class="fas fa-wallet" data-toggle="tooltip" data-placement="bottom" title="{{ strtoupper($user->walletType) }}"></em>
                                         <!-- There might be other similar <em> tags here -->
@@ -514,10 +514,10 @@
                                         <!-- There might be other similar <em> tags here -->
                                     @endif
                                 </span>
-                                <span class="small">({{ round(floatval($trnx->tnxUser->tokenBalance),3) }} || {{ round(floatval($trnx->tnxUser->equity),3) }})</span>
-                                <span class="sub sub-symbol">{{ $trnx->tnxUser->email }}</span>
-                                @if(!empty(json_decode($trnx->tnxUser->referralInfo)))
-                                    <span class="sub sub-symbol">R: {{ optional(json_decode($trnx->tnxUser->referralInfo))->name }}</span>
+                                <span class="small">({{ round(floatval($trnx->tnxUser()->tokenBalance),3) }} || {{ round(floatval($trnx->tnxUser()->equity),3) }})</span>
+                                <span class="sub sub-symbol">{{ $trnx->tnxUser()->email }}</span>
+                                @if(!empty(json_decode($trnx->tnxUser()->referralInfo)))
+                                    <span class="sub sub-symbol">R: {{ optional(json_decode($trnx->tnxUser()->referralInfo))->name }}</span>
                                 @endif
                             </td>
                             <td class="data-col dt-token">
@@ -562,7 +562,7 @@
                                     <span class="sub sub-email"><a href="{{ route('admin.transactions.view', ($extra->trnx ?? $trnx->id)) }}">View Transaction</a></span>
                                 @else
                                     <span class="sub sub-email">{{ $trnx->user }} 
-<!--                                        <em class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="{{ isset($trnx->tnxUser) ? explode_user_for_demo($trnx->tnxUser->email, auth()->user()->type) : '' }}"></em>-->
+<!--                                        <em class="fas fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="{{ $trnx->tnxUser() ? explode_user_for_demo($trnx->tnxUser()->email, auth()->user()->type) : '' }}"></em>-->
                                 </span> 
                                 @endif
                             </td>
@@ -580,7 +580,7 @@
                                         <ul id="more-menu-{{ $trnx->id }}" class="dropdown-list">
                                             <li><a href="{{ route('admin.transactions.view', $trnx->id) }}">
                                                 <em class="fa fa-eye"></em> Trnx Details</a></li>
-                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser->id }}" data-type="transactions" class="user-form-action user-action"><em class="fas fa-random"></em>All Transactions</a></li>
+                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser()->id }}" data-type="transactions" class="user-form-action user-action"><em class="fas fa-random"></em>All Transactions</a></li>
                                             
                                             <li><a class="user-email-action" href="#SMSUser" data-uid="{{ $user->id }}" data-toggle="modal" onclick="openMessageModalAndSetName( {{$user->id}}, '{{$user->name}}' )"><em class="far fa-bell"></em>Send Message</a></li>
                                             
@@ -604,9 +604,9 @@
                                             </form>
                                             @endif
                                             
-                                            <li><a href="{{ route('admin.users.view', [$trnx->tnxUser->id, 'details'] ) }}"><em class="fa fa-user"></em> User Details</a></li>
-                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser->id }}" data-type="activities" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>User Activities</a></li>
-                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser->id }}" data-type="referrals" class="user-form-action user-action"><em class="fas fa-users"></em>Referrals</a></li>
+                                            <li><a href="{{ route('admin.users.view', [$trnx->tnxUser()->id, 'details'] ) }}"><em class="fa fa-user"></em> User Details</a></li>
+                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser()->id }}" data-type="activities" class="user-form-action user-action"><em class="fas fa-sign-out-alt"></em>User Activities</a></li>
+                                            <li><a href="javascript:void(0)" data-uid="{{ $trnx->tnxUser()->id }}" data-type="referrals" class="user-form-action user-action"><em class="fas fa-users"></em>Referrals</a></li>
                                             @if( $trnx->tnx_type == 'transfer' && $trnx->status == 'pending')
                                             <li><a href="javascript:void(0)" class="tnx-transfer-action" data-status="approved" data-tnx_id="{{ $trnx->id }}">
                                                 <em class="far fa-check-square"></em> Approve</a></li>

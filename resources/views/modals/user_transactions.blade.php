@@ -66,7 +66,7 @@ function daysDifferenceFromToday($datetimeString) {
                         </div>
                         
                         @php
-                        $end_date = (new DateTime($tnx->created_at))->add(new DateInterval('P'.((int) filter_var($tnx->duration, FILTER_SANITIZE_NUMBER_INT)).'M'));
+                        $end_date = (new DateTime('@' . $tnx->created_at))->add(new DateInterval('P'.((int) filter_var($tnx->duration, FILTER_SANITIZE_NUMBER_INT)).'M'));
                         $now = new DateTime();
                         $interval = $now->diff($end_date);
                         $class = '';
