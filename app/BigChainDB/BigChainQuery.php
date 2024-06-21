@@ -37,11 +37,12 @@ class BigChainQuery
         }
     }
 
-    private function getParams() {
+    private function getParams($encoded = true) {
+        $where = json_encode($this->queries);
         return [
             'object' => $this->table,
             'join' => $this->join,
-            'where' => $this->queries ? urlencode(json_encode($this->queries)) : null,
+            'where' => $this->queries ? ($encoded ? rawurlencode($where) : $where): null,
             'orderBy' => $this->orders,
             'page' => $this->page,
             'limit' => $this->limit
@@ -54,7 +55,7 @@ class BigChainQuery
 
     public function get()
     {    
-        Log::info('GET ' . $this->table . ' QUERY ' . json_encode($this->getParams()));
+        Log::info('GET ' . $this->table . ' QUERY ' . json_encode($this->getParams(false)));
 
         $response = self::$driver->get('/', [ 'query' => $this->getParams() ]);
 
@@ -99,9 +100,29 @@ class BigChainQuery
         return $res ? $res->{$column} : null;
     }
 
+    public function pluck(string $column)
+    {
+        $values = [];
+        foreach($this->get() as $item)
+            $values[] = $item->{$column};
+        return new Collection($values);
+    }
+
+    public function select(string $column)
+    {
+        return array_unique($this->pluck($column)->toArray());
+    }
+
+    
+ 
+    public function find(string $id)
+    {
+        return $this->where('id', $id)->first();
+    }
+
     public function count()
     {
-        Log::info('GET ' . $this->table . ' QUERY ' . json_encode($this->getParams()));
+        Log::info('COUNT ' . $this->table . ' QUERY ' . json_encode($this->getParams(false)));
         $res = self::$driver->get('/count', [ 'query' => $this->getParams() ]);
         $count = json_decode($res->getBody()->getContents())->data;
         Log::info('RETURN COUNT ' . $count);
@@ -115,12 +136,21 @@ class BigChainQuery
 
     public function sum($column)
     {
+        Log::info('SUM ' . $this->table . ' QUERY ' . json_encode($this->getParams(false)));
         $params = $this->getParams();
         $params['column'] = $column;
         $res = self::$driver->get('/sum', [ 'query' => $params ]);
-        return json_decode($res->getBody()->getContents())->data;
+        $sum = json_decode($res->getBody()->getContents())->data;
+        Log::info('RETURN SUM ' . $sum);
+        return $sum;
     }
 
+    
+    /**
+     * Add JOIN clause to the query.
+     * @param   array  $data
+     * @return  BigChainModel
+     */
     public function create($data)
     {
         $res = self::$driver->post('/', [ 'json' => [
@@ -143,9 +173,14 @@ class BigChainQuery
         return $this->create($data);
     }
 
+    public function insertGetId($data)
+    {
+        return $this->create($data)->id ?? null;
+    }
+
     public function update($data)
     {
-        $params = $this->getParams();
+        $params = $this->getParams(false);
         $params['data'] = $data;
         $res = self::$driver->put('/', [ 'json' => $params ]);
         $data = json_decode($res->getBody()->getContents())->data;
@@ -210,13 +245,15 @@ class BigChainQuery
      *
      * @param  string  $column
      * @param  string  $order
+     * @param  string  $typecast
      * @return $this
      */
-    public function orderBy($column, $order)
+    public function orderBy($column, $order, $typecast = null)
     {
         $this->orders[] = [
             'key' => $column,
-            'order' => $order
+            'order' => $order,
+            'typecast' => $typecast
         ];
         return $this;
     }
