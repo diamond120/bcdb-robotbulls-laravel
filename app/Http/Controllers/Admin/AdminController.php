@@ -59,15 +59,15 @@ class AdminController extends Controller
             
             
             $total_tokens = Transaction::join('users', 'transactions.user', '=', 'users.id')
-                ->whereNotIn('transactions.user', ['1', '2', '3', '4'])
-                ->where('transactions.tnx_type', 'purchase')
+                ->where('users.role', 'user')//['1', '2', '3', '4'])
+                ->where('transactions.tnx_type', 'purc hase')
                 ->where('transactions.status', 'approved')
                 ->where('users.status', '<>', 'suspended')
                 ->where('users.email', 'not like', '%@%')
                 ->sum('transactions.tokens');
 
             $total_equity = Transaction::join('users', 'transactions.user', '=', 'users.id')
-                ->whereNotIn('transactions.user', ['1', '2', '3', '4'])
+                ->where('users.role', 'user')
                 ->where('transactions.tnx_type', 'purchase')
                 ->where('transactions.status', 'approved')
                 ->where('users.status', '<>', 'suspended')
@@ -94,7 +94,6 @@ class AdminController extends Controller
             
             
             $users2 = User::whereNotIn('status', ['suspended'])
-                ->whereNotIn('id', ['1', '2', '3', '4'])
                 ->where('role', 'user')
                 ->where('equity', '>', 0)
                 ->where('email', 'not like', '%@%')
@@ -467,7 +466,7 @@ class AdminController extends Controller
     public function activity()
     {
         $user = Auth::user();
-        $activities = Activity::FindOrFail($user->id)->orderBy('created_at', 'DESC')->limit(50)->get();
+        $activities = Activity::where('user_id', $user->id)->orderBy('created_at', 'DESC')->limit(50)->get();
         return view('admin.activity', compact('user', 'activities'));
     }
     /**

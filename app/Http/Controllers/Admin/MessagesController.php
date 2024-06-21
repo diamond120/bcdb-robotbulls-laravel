@@ -51,18 +51,11 @@ class MessagesController extends Controller
         
         
         // Retrieve latest message of each user
-        $messages = ClientMessage::select('user', DB::raw('MAX(created_at) as latest_message_time'))
-            ->groupBy('user')
-            ->orderBy('latest_message_time', 'desc')
-            ->get();
+        $users = ClientMessage::select('user');
 
         $data = [];
-        foreach ($messages as $message) {
-            $latestMessage = ClientMessage::where('user', $message->user)
-                ->where('created_at', $message->latest_message_time)
-                ->first();
-
-
+        foreach ($users as $user) {
+            $latestMessage = ClientMessage::where('user', $user)->latest()->first();
 
             $data[] = [
                 'user_id' => $latestMessage->user,

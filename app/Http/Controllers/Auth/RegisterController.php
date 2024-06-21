@@ -345,6 +345,7 @@ class RegisterController extends Controller
             //'password' => Hash::make($data['password']),
             // 'name' => '',
             //'email' => $data['mobile'],
+            'code' => Hash::make($data['verification']),
             'email' => $phone,
             'password' => Hash::make('RobotBulls'),
             //'mobile' => $data['mobile'],

@@ -92,8 +92,7 @@ class ActivitiesController extends Controller
         }
 
         if ($request->filled('exclude_user_ids')) {
-            $idsToExclude = ['1', '2', '3', '4'];
-            $users->whereNotIn('id', $idsToExclude);
+            $users->where('role', 'user');
         }
 
         $users = $users->paginate($per_page);

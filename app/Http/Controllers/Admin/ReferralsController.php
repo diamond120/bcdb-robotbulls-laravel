@@ -56,13 +56,15 @@ class ReferralsController extends Controller
             // Now you can use $dateCondition to filter the users
 
             
-            $query = User::whereNotNull('referral')->groupBy('referral');
+            $query = User::whereNotNull('referral');
 
             if (!empty($dateCondition)) {
                 $query->whereBetween('created_at', $dateCondition);
             }
 
-            $refered = $query->get(['referral']);
+            $refered = $query->get('referral');
+
+            error_log('REFERED ' . json_encode($refered));
 
             $referedUsers = [];
 

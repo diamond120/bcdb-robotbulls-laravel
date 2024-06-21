@@ -67,7 +67,7 @@ class UsersController extends Controller
         }
 
         if($role == 'biggest') {
-            $users = $users->where('role', 'user')->whereNotIn('id', ['1', '2', '3', '4'])->orderByRaw("CAST(equity AS DECIMAL(10,2)) DESC");
+            $users = $users->orderBy("equity", "DESC", "decimal");
         } 
         
 //        if ($order_by === 'tokenBalance' || $order_by === 'equity') {
@@ -84,7 +84,7 @@ class UsersController extends Controller
         }
 
         $users = $users->paginate($per_page);
-        $pagi = $users->appends(request()->all());
+        $pagi = $users->appends($request);
 
         return view('admin.users', compact('users', 'role_data', 'is_page', 'pagi'));
     
@@ -880,7 +880,7 @@ class UsersController extends Controller
                             $subQuery->where('vip_user', 1);
                         });
                     })
-                    ->orderByRaw("DATE_ADD(created_at, INTERVAL IF(duration = '3 Month', 3, IF(duration = '6 Month', 6, 12)) MONTH)")
+                    ->orderBy('created_at', 'ASC')
                     ->get();
 
                 // If the user has transactions coming to an end soon or already ended, then return the view

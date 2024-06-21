@@ -82,22 +82,22 @@ class TransactionController extends Controller
                     $subQuery->where('vip_user', 1);
                 });
             })
-            ->orderByRaw("DATE_ADD(created_at, INTERVAL IF(duration = '3 Month', 3, IF(duration = '6 Month', 6, 12)) MONTH)")
-            ->paginate(100)->appends(request()->query());
+            ->orderBy('created_at', 'ASC')
+            ->paginate(100)->appends($request);
 
         }  elseif($status=='percentage') {
             $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])
             ->whereNotIn('tnx_type', ['withdraw', 'bonus', 'referral', 'demo'])
             ->whereNotIn('plan', ['RBC', 'Bonus', 'Referral', "DOGE", "BTC", "ETH", "Transaction from"])
             ->whereNotIn('user', ['1', '2', '3', '4'])
-            ->where('status', "approved")->orderByRaw("CAST(percentage AS DECIMAL(10,2)) DESC")->paginate($per_page);
+            ->where('status', "approved")->orderBy("percentage", "DESC", "decimal")->paginate($per_page);
         
         } elseif($status=='biggest') {
             $trnxs = Transaction::whereNotIn('status', ['deleted', 'new'])
             ->whereNotIn('tnx_type', ['withdraw', 'bonus', 'referral', 'demo'])
             ->whereNotIn('plan', ['RBC', 'Bonus', 'Referral', "DOGE", "BTC", "ETH", "Transaction from"])
             ->whereNotIn('user', ['1', '2', '3', '4'])
-            ->where('status', "approved")->orderByRaw("CAST(equity AS DECIMAL(10,2)) DESC")->paginate($per_page);
+            ->where('status', "approved")->orderBy("equity", "DESC", "decimal")->paginate($per_page);
             
             
         } elseif($status!=null) {
@@ -121,7 +121,7 @@ class TransactionController extends Controller
         
         // Add the new orderByRaw() here
         if ($order_by === 'tokenBalance' && $status!='expiring' && $status!='percentage' && $status!='biggest' || $order_by === 'equity' && $status!='expiring' && $status!='percentage' && $status!='biggest' || $order_by === 'percentage' && $status!='expiring' && $status!='percentage' && $status!='biggest') {
-            $trnxs = $trnxs->orderByRaw("CAST($order_by AS DECIMAL(10,2)) $ordered")->paginate($per_page);
+            $trnxs = $trnxs->orderBy($order_by, $ordered, "decimal")->paginate($per_page);
         } elseif ($order_by === 'created_at' && $status!='expiring' && $status!='percentage' && $status!='biggest') {
             $trnxs = $trnxs->orderBy($order_by, $ordered)->paginate($per_page);
         } elseif ($status!='expiring' && $status!='percentage' && $status!='biggest') {
@@ -134,7 +134,7 @@ class TransactionController extends Controller
         $stages = IcoStage::whereNotIn('status', ['deleted'])->get();
         $pm_currency = PaymentMethod::Currency;
         $users = User::where('status', 'active')->whereNotNull('email_verified_at')->where('role', '!=', 'admin')->get();
-        $pagi = $trnxs->appends(request()->all());
+        $pagi = $trnxs->appends($request);
         
         
         $t = new Datetime('19:30:00');
@@ -701,7 +701,7 @@ class TransactionController extends Controller
                 IcoStage::token_add_to_account($trnx, 'sub');
                 
                 try {
-                    $trnx->tnxUser->notify((new TnxStatus($trnx, 'rejected-user')));
+                    $trnx->tnxUser()->notify((new TnxStatus($trnx, 'rejected-user')));
                     $ret['msg'] = 'success';
                     $ret['message'] = __('messages.trnx.admin.canceled');
                 } catch (\Exception $e) {
@@ -804,7 +804,7 @@ class TransactionController extends Controller
                     }
 
                     try {
-                        $trnx->tnxUser->notify((new TnxStatus($trnx, 'successful-user')));
+                        $trnx->tnxUser()->notify((new TnxStatus($trnx, 'successful-user')));
                         $ret['msg'] = 'success';
                         $ret['message'] = __('messages.trnx.admin.approved');
                     } catch (\Exception $e) {
@@ -902,7 +902,7 @@ class TransactionController extends Controller
     {
         if(auth()->user()->role == 'admin') {
         try {
-            $refund->tnxUser->notify(new Refund($refund, $transaction));
+            $refund->tnxUser()->notify(new Refund($refund, $transaction));
             return true;
         } catch (\Exception $e) {
             // info($e->getMessage());
@@ -922,6 +922,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        error_log('entred store');
         if(auth()->user()->role == 'admin') {
         if (version_compare(phpversion(), '7.1', '>=')) {
             ini_set('precision', 17);
@@ -968,7 +969,7 @@ class TransactionController extends Controller
                 'total_bonus' => 0,
                 'total_tokens' => $fiat_amount,
                 'stage' => (int) $request->input('stage', active_stage()->id),
-                'user' => (int) $request->input('user'),
+                'user' => $request->input('user'),
                 
                 'amount' => $crypto_amount,
                 'receive_amount' => $crypto_amount,
@@ -991,6 +992,7 @@ class TransactionController extends Controller
                 
                 'extra' => '{"level":"level1","bonus":'.$request->input('fiat_amount').',"calc":"percent","who":'.$request->input('referee').',"type":"invite","allow":-1,"count":1950,"tokens":'.strval(floatval($request->input('fiat_amount'))*10).',"tnx_by":'.$request->input('referee').',"tnx_id":"'.$tnx_id.'"}',
             ];
+            error_log('insert transaction');
 
             $iid = Transaction::insertGetId($save_data);
 
