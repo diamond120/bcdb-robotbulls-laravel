@@ -54,7 +54,10 @@ class BigChainModel
     }
 
     public function save() {
-        self::where('id', $this->attributes['id'])->update($this->attributes);
+        if(isset($this->attributes['id']))
+            self::where('id', $this->attributes['id'])->update($this->attributes);
+        else
+            self::create($this->attributes);
     }
 
     public static function __callStatic($method, $parameters)
