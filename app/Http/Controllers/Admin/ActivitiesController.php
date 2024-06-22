@@ -83,20 +83,20 @@ class ActivitiesController extends Controller
         }
 
         // Add orderBy with activities count
-        if (!empty($dateCondition)) {
-            $users = $users->withCount(['activities as activities_count' => function($query) use ($dateCondition){
-                $query->whereBetween('created_at', $dateCondition);
-            }])->orderBy('activities_count', 'desc');
-        } else {
-            $users = $users->withCount('activities as activities_count')->orderBy('activities_count', 'desc');
-        }
+        // if (!empty($dateCondition)) {
+        //     $users = $users->withCount(['activities as activities_count' => function($query) use ($dateCondition){
+        //         $query->whereBetween('created_at', $dateCondition);
+        //     }])->orderBy('activities_count', 'desc');
+        // } else {
+        //     $users = $users->withCount('activities as activities_count')->orderBy('activities_count', 'desc');
+        // }
 
         if ($request->filled('exclude_user_ids')) {
             $users->where('role', 'user');
         }
 
         $users = $users->paginate($per_page);
-        $pagi = $users->appends(request()->all());
+        $pagi = $users->appends($request);
 
         return view('admin.users', compact('users', 'role_data', 'is_page', 'pagi'));
     

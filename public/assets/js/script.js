@@ -12,6 +12,7 @@ function ajax_form_submit(t = $(".validate-form"), e = !0, a = "ti ti-alert", n 
             submitHandler: function (i) {
                 $(i).ajaxSubmit({
                     beforeSubmit: function () {
+                        return true;
                         if (!$(i).tokenValidity()) return setTimeout(function () {
                             show_toast("error", "Unable to perform!\n", "ti ti-na")
                         }, 400), !1
