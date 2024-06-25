@@ -144,11 +144,11 @@ This project demonstrates how to integrate BigchainDB into a Laravel application
 
   Clone the Git Repository
 
-    git clone https://<token>@github.com/stainless-nata/js-bigchaindb-proxy.git
+    git clone https://<token>@github.com/diamond120/js-bigchain-driver.git
 
   Move into the Repository
 
-    cd js-bigchaindb-proxy
+    cd js-bigchain-driver
 
   Install Dependencies
 
@@ -387,7 +387,7 @@ This project demonstrates how to integrate BigchainDB into a Laravel application
 
   Move to the BigChain Driver Repository
 
-    cd /home/diamond/js-bigchaindb-proxy
+    cd /home/diamond/js-bigchain-driver
     cd migration
 
   Run the Migration Script
